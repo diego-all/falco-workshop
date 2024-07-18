@@ -1,0 +1,36 @@
+
+
+
+git log --all
+
+git log --all --graph
+
+
+git tag -a v0.1 -m "texto de referencia" <commitID>
+git tag  (ver todos los tags)
+
+git show-ref --tags (a que commit esta conectado un tag)
+
+Los tags son utiles en Github 
+
+git push origin --tags
+
+git tag -d dormido  Se borra de git pero no de github, es por que los tags se puedne usar como releases.
+
+
+
+El error que estás viendo indica que Go no puede encontrar el ejecutable de git en el PATH del sistema. Esto suele ocurrir cuando Go intenta inicializar un repositorio git para descargar el módulo especificado. Aquí te explico qué está pasando y cómo puedes solucionarlo:
+
+
+
+Dependencias
+
+versionde golang
+
+tag debe generarse y al parecer apuntar
+
+git
+
+
+Si se requiere un tag especifico
+

@@ -1,0 +1,51 @@
+# Con Workshop
+
+root@pho3nix:/home/diegoall# curl -sL http://34.27.180.215/sitio/vuelta.txt | python3
+Error al ejecutar el comando de Golang: Command '['go', 'run', 'github.com/diego-all/falco-workshop@v0.1', 'init', '--vector', 'A']' returned non-zero exit status 1.
+Salida de error:
+go: github.com/diego-all/falco-workshop@v0.1: no matching versions for query "v0.1"
+
+
+
+
+
+# Con Genotype
+
+Tener en cuenta que no tiene tag, le debe apuntar a main y todo esta en otra rama.
+
+
+root@pho3nix:/home/diegoall/FALCO/falco-workshop# curl -sL http://34.27.180.215/sitio/vuelta.txt | python3
+Error al ejecutar el comando de Golang: Command '['go', 'run', 'github.com/diego-all/falco-workshop@v0.1', 'init', '--vector', 'A']' returned non-zero exit status 1.
+Salida de error:
+go: github.com/diego-all/falco-workshop@v0.1: no matching versions for query "v0.1"
+
+root@pho3nix:/home/diegoall/FALCO/falco-workshop# curl -sL http://34.27.180.215/sitio/vuelta.txt | python3
+Error al ejecutar el comando de Golang: Command '['go', 'run', 'github.com/diego-all/run-from-gh@latest', 'init', '--db', 'postgres', '--config', '/home/diegoall/MAESTRIA_ING/CLI/run-from-gh/inputs/config.json', 'projectTest']' returned non-zero exit status 1.
+Salida de error:
+Error: unknown flag: --config
+Usage:
+  my-cli-app init [nombre del proyecto] [flags]
+
+Flags:
+  -d, --db string   Tipo de base de datos (requerido)
+  -h, --help        help for init
+
+exit status 1
+
+
+# CAUSAS
+
+- quizas sea el modulo? habia funcionado con un script de hola mundo
+- Interprete de Go ? no creo
+- quizas el tag?
+- lanzarlo local si genera problemas debe ser por ejecutarlo con python.
+- hola amigo, tenía ese mismo error para Windows 10 y lo que hice fue desinstalar el python y volverlo a instalar como administrador teniendo en cuenta que se seleccione en el wizard que este para todos los usuarios y listo, todo solucionado.
+
+AL parecer no es python por que si ejecuto el coquito.
+
+
+root@pho3nix:/home/diegoall/FALCO/falco-workshop# curl -sL http://34.27.180.215/sitio/vuelta.txt | python3
+Salida estándar:
+Hola Diego
+
+Salida de error:
