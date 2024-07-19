@@ -34,3 +34,12 @@ git
 
 Si se requiere un tag especifico
 
+    git tag -a v0.1.1 -m "Nueva versión con el comando init"
+    git push origin v0.1.1
+    go run github.com/diego-all/bridge-exe@v0.1.1 init --name Diego
+
+
+
+
+
+
