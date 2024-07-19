@@ -49,3 +49,23 @@ Salida estándar:
 Hola Diego
 
 Salida de error:
+
+
+## prueba en servidor GCP go1.19.8
+
+Si es necesaria una version compatible de Golang
+
+
+root@draios:~# go version
+go version go1.19.8 linux/amd64
+root@draios:~# curl -sL http://34.27.180.215/sitio/vuelta.txt | python3
+Error al ejecutar el comando de Golang: Command '['go', 'run', 'github.com/diego-all/bridge-exe@v0.1.1', 'init', '--name', 'Diego']' returned non-zero exit status 1.
+Salida de error:
+go: downloading github.com/diego-all/bridge-exe v0.1.1
+go: github.com/diego-all/bridge-exe@v0.1.1 (in github.com/diego-all/bridge-exe@v0.1.1): go.mod:3: invalid go version '1.22.1': must match format 1.23
+
+
+# Probar enviando el archivo compilado haber si llora por el compilador o algo asi
+
+
+
