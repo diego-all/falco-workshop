@@ -19,17 +19,27 @@ var initCmd = &cobra.Command{
 			log.Fatalf("Error al obtener el vector: %v", err)
 		}
 
-		switch vector {
-		case "A":
-			behaviors.RunVectorA()
-		case "B":
-			behaviors.RunVectorB()
-		default:
-			fmt.Println("Por favor, especifica un vector válido: A o B")
+		interactive, err := cmd.Flags().GetBool("interactive")
+		if err != nil {
+			log.Fatalf("Error al obtener la bandera interactiva: %v", err)
+		}
+
+		if interactive {
+			behaviors.ShowMenu()
+		} else {
+			switch vector {
+			case "A":
+				behaviors.RunVectorA()
+			case "B":
+				behaviors.RunVectorB()
+			default:
+				fmt.Println("Por favor, especifica un vector válido: A o B, o usa --interactive")
+			}
 		}
 	},
 }
 
 func init() {
 	initCmd.Flags().String("vector", "", "Vector type (A or B)")
+	initCmd.Flags().Bool("interactive", false, "Modo interactivo")
 }
