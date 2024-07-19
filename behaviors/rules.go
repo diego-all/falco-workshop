@@ -1,8 +1,11 @@
 package behaviors
 
 import (
+	"bytes"
 	"fmt"
 	"os"
+	"os/exec"
+	"time"
 )
 
 func ShowMenu() {
@@ -16,8 +19,8 @@ func ShowMenu() {
 	fmt.Println("7. Linux Kernel Module Injection")
 	fmt.Println("8. Clear Log Activities")
 	fmt.Println("9. Remove Bulk Data from Disk")
-	fmt.Println("10. Clear Log Activities")
-	fmt.Println("11. Search Private Keys or Passwords")
+	fmt.Println("10. Search Private Keys or Passwords")
+	fmt.Println("11. ")
 	fmt.Println("12. Detect crypto miners using the Stratum protocol")
 	fmt.Println("13. XXX")
 	fmt.Println("14. XXXX")
@@ -47,10 +50,16 @@ func ShowMenu() {
 	case 9:
 		RemoveBulkDatafromDisk()
 	case 10:
-		DetectCryptoMinersUsingTheStratumProtocol()
+		SearchPrivateKeysOrPasswords()
 	case 11:
-		LaunchSuspiciousNetworkToolInContainer()
+		DetectCryptoMinersUsingTheStratumProtocol()
 	case 12:
+		LaunchSuspiciousNetworkToolInContainer()
+	case 13:
+		NetcatRemoteCodeExecutionInContainer()
+	case 14:
+		NetcatRemoteCodeExecutionInContainer()
+	case 15:
 		NetcatRemoteCodeExecutionInContainer()
 	default:
 		fmt.Println("Opción no válida")
@@ -120,6 +129,40 @@ func ClearLogActivities() {
 func RemoveBulkDatafromDisk() {
 	fmt.Println("Ejecutando: Remove Bulk Data from Disk")
 	// Lógica para Regla3
+}
+
+func SearchPrivateKeysOrPasswords() {
+	fmt.Println("Ejecutando: Search Private Keys or Passwords")
+
+	// Primer comando
+	cmd1 := exec.Command("find", "/", "-name", "id_rsa")
+	var out1 bytes.Buffer
+	cmd1.Stdout = &out1
+
+	if err := cmd1.Run(); err != nil {
+		fmt.Println("Error ejecutando el primer comando:", err)
+		return
+	}
+
+	fmt.Println("Resultado del primer comando:")
+	fmt.Println(out1.String())
+
+	// Esperar 3 segundos
+	time.Sleep(3 * time.Second)
+
+	// Segundo comando
+	cmd2 := exec.Command("grep", "-r", "BEGIN RSA PRIVATE", "/")
+	var out2 bytes.Buffer
+	cmd2.Stdout = &out2
+
+	if err := cmd2.Run(); err != nil {
+		fmt.Println("Error ejecutando el segundo comando:", err)
+		return
+	}
+
+	fmt.Println("Resultado del segundo comando:")
+	fmt.Println(out2.String())
+
 }
 
 func DetectCryptoMinersUsingTheStratumProtocol() {

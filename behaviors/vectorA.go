@@ -2,9 +2,23 @@ package behaviors
 
 import "fmt"
 
+// Infection mode guarantees that 2 rules are triggered initially
+
+// Download malware (rootkit)? persitence
+// busca keys , envia keys
+
+// Borra evidencia Validar que el script deje esta ejecucion en history
+
 func RunVectorA() {
 	fmt.Println("Ejecutando la función para vector A")
+
 	// Llama a otras funciones necesarias aquí
+	CreateFilesBelowDev()
+
+	SearchPrivateKeysOrPasswords()
+
+	ClearLogActivities()
+
 	SubFunctionA1()
 	SubFunctionA2()
 }
