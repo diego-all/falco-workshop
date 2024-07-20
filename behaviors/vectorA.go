@@ -19,9 +19,13 @@ func RunVectorA() {
 
 	CreateFilesBelowDev()
 
-	// SearchPrivateKeysOrPasswords()
+	time.Sleep(3 * time.Second)
 
-	//ClearLogActivities()
+	SearchPrivateKeysOrPasswords()
+
+	time.Sleep(3 * time.Second)
+
+	ClearLogActivities()
 
 	// Esperar 3 segundos
 	time.Sleep(3 * time.Second)
