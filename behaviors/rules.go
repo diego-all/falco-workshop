@@ -172,7 +172,7 @@ func DetectCryptoMinersUsingTheStratumProtocol() {
 }
 
 func LaunchSuspiciousNetworkToolInContainer() {
-	fmt.Println("Ejecutando: Remove Bulk Data from Disk")
+	fmt.Println("Ejecutando: LaunchSuspiciousNetworkToolInContainer")
 
 	// Verificar si nmap está instalado
 	_, err := exec.LookPath("nmap")

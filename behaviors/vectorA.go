@@ -16,6 +16,8 @@ func RunVectorA() {
 
 	LaunchSuspiciousNetworkToolInContainer()
 
+	fmt.Println("Done Launch external")
+
 	// CreateFilesBelowDev()
 
 	// SearchPrivateKeysOrPasswords()
