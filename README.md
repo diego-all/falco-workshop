@@ -23,3 +23,6 @@ validar versiones de golang
     go run github.com/diego
 
     go run main.go init --db postgres --config /home/diegoall/MAESTRIA_ING/CLI/run-from-gh/inputs/classes.json projectTest
+
+
+    go list -m -versions github.com/diego-all/falco-workshop

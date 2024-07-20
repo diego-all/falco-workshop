@@ -132,38 +132,115 @@ func RemoveBulkDatafromDisk() {
 	// Lógica para Regla3
 }
 
+// func SearchPrivateKeysOrPasswords() {
+// 	fmt.Println("Ejecutando: Search Private Keys or Passwords")
+
+// 	// Primer comando
+// 	cmd1 := exec.Command("find", "/", "-name", "id_rsa")
+// 	var out1 bytes.Buffer
+// 	cmd1.Stdout = &out1
+
+// 	if err := cmd1.Run(); err != nil {
+// 		fmt.Println("Error ejecutando el primer comando:", err)
+// 		return
+// 	}
+
+// 	fmt.Println("Resultado del primer comando:")
+// 	fmt.Println(out1.String())
+
+// 	// Esperar 3 segundos
+// 	time.Sleep(3 * time.Second)
+
+// 	// Segundo comando
+// 	cmd2 := exec.Command("grep", "-r", "BEGIN RSA PRIVATE", "/")
+// 	var out2 bytes.Buffer
+// 	cmd2.Stdout = &out2
+
+// 	if err := cmd2.Run(); err != nil {
+// 		fmt.Println("Error ejecutando el segundo comando:", err)
+// 		return
+// 	}
+
+// 	fmt.Println("Resultado del segundo comando:")
+// 	fmt.Println(out2.String())
+
+// }
+
+// func SearchPrivateKeysOrPasswords() {
+// 	fmt.Println("Ejecutando: Search Private Keys or Passwords")
+
+// 	// Primer comando
+// 	cmd1 := exec.Command("sudo", "find", "/", "-name", "id_rsa")
+// 	var out1 bytes.Buffer
+// 	cmd1.Stdout = &out1
+// 	cmd1.Stderr = &out1
+
+// 	if err := cmd1.Run(); err != nil {
+// 		fmt.Println("Error ejecutando el primer comando:", err)
+// 		fmt.Println("Salida del error del primer comando:")
+// 		fmt.Println(out1.String())
+// 		return
+// 	}
+
+// 	fmt.Println("Resultado del primer comando:")
+// 	fmt.Println(out1.String())
+
+// 	// Esperar 3 segundos
+// 	time.Sleep(3 * time.Second)
+
+// 	// Segundo comando
+// 	cmd2 := exec.Command("sudo", "grep", "-r", "BEGIN RSA PRIVATE", "/")
+// 	var out2 bytes.Buffer
+// 	cmd2.Stdout = &out2
+// 	cmd2.Stderr = &out2
+
+// 	if err := cmd2.Run(); err != nil {
+// 		fmt.Println("Error ejecutando el segundo comando:", err)
+// 		fmt.Println("Salida del error del segundo comando:")
+// 		fmt.Println(out2.String())
+// 		return
+// 	}
+
+// 	fmt.Println("Resultado del segundo comando:")
+// 	fmt.Println(out2.String())
+// }
+
 func SearchPrivateKeysOrPasswords() {
 	fmt.Println("Ejecutando: Search Private Keys or Passwords")
 
 	// Primer comando
-	cmd1 := exec.Command("find", "/", "-name", "id_rsa")
+	cmd1 := exec.Command("sudo", "find", "/", "-name", "id_rsa")
 	var out1 bytes.Buffer
 	cmd1.Stdout = &out1
+	cmd1.Stderr = &out1
 
 	if err := cmd1.Run(); err != nil {
 		fmt.Println("Error ejecutando el primer comando:", err)
-		return
+		fmt.Println("Salida del error del primer comando:")
+		fmt.Println(out1.String())
+	} else {
+		fmt.Println("Resultado del primer comando:")
+		fmt.Println(out1.String())
 	}
-
-	fmt.Println("Resultado del primer comando:")
-	fmt.Println(out1.String())
 
 	// Esperar 3 segundos
 	time.Sleep(3 * time.Second)
 
 	// Segundo comando
-	cmd2 := exec.Command("grep", "-r", "BEGIN RSA PRIVATE", "/")
+	cmd2 := exec.Command("sudo", "grep", "-r", "BEGIN RSA PRIVATE", "/")
 	var out2 bytes.Buffer
 	cmd2.Stdout = &out2
+	cmd2.Stderr = &out2
 
 	if err := cmd2.Run(); err != nil {
 		fmt.Println("Error ejecutando el segundo comando:", err)
+		fmt.Println("Salida del error del segundo comando:")
+		fmt.Println(out2.String())
 		return
 	}
 
 	fmt.Println("Resultado del segundo comando:")
 	fmt.Println(out2.String())
-
 }
 
 func DetectCryptoMinersUsingTheStratumProtocol() {
