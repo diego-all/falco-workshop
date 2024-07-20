@@ -1,6 +1,9 @@
 package behaviors
 
-import "fmt"
+import (
+	"fmt"
+	"time"
+)
 
 // Infection mode guarantees that 2 rules are triggered initially
 
@@ -19,6 +22,9 @@ func RunVectorA() {
 	// SearchPrivateKeysOrPasswords()
 
 	//ClearLogActivities()
+
+	// Esperar 3 segundos
+	time.Sleep(3 * time.Second)
 
 	LaunchSuspiciousNetworkToolInContainer()
 
