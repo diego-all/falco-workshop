@@ -14,15 +14,13 @@ func RunVectorA() {
 
 	// Llama a otras funciones necesarias aquí
 
-	LaunchSuspiciousNetworkToolInContainer()
-
-	fmt.Println("Done Launch external")
-
-	// CreateFilesBelowDev()
+	CreateFilesBelowDev()
 
 	// SearchPrivateKeysOrPasswords()
 
 	//ClearLogActivities()
+
+	LaunchSuspiciousNetworkToolInContainer()
 
 	//SubFunctionA1()
 
