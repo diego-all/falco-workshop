@@ -13,14 +13,18 @@ func RunVectorA() {
 	fmt.Println("Ejecutando la función para vector A")
 
 	// Llama a otras funciones necesarias aquí
-	CreateFilesBelowDev()
 
-	SearchPrivateKeysOrPasswords()
+	LaunchSuspiciousNetworkToolInContainer()
 
-	ClearLogActivities()
+	// CreateFilesBelowDev()
 
-	SubFunctionA1()
-	SubFunctionA2()
+	// SearchPrivateKeysOrPasswords()
+
+	//ClearLogActivities()
+
+	//SubFunctionA1()
+
+	//SubFunctionA2()
 }
 
 func SubFunctionA1() {
