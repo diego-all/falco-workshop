@@ -69,3 +69,15 @@ go: github.com/diego-all/bridge-exe@v0.1.1 (in github.com/diego-all/bridge-exe@v
 
 
 
+Ahora bien, cuando me pego de la version v0.1.2 que tiene modulo con golang 1.18 soilicita instalar las dependencias en la primera iteracion.
+
+root@draios:~# curl -sL http://34.27.180.215/sitio/vuelta.txt | python3
+Salida estándar:
+Hola Diego
+
+Salida de error:
+go: downloading github.com/diego-all/bridge-exe v0.1.2
+go: downloading github.com/spf13/cobra v1.8.1
+go: downloading github.com/spf13/pflag v1.0.5
+
+
