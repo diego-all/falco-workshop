@@ -17,11 +17,17 @@ func RunVectorA() {
 
 	// Llama a otras funciones necesarias aquí
 
+	if err := LinuxKernelModuleInjection(); err != nil {
+		fmt.Printf("Error: %v\n", err)
+	} else {
+		fmt.Println("Módulo del kernel inyectado exitosamente.")
+	}
+
 	CreateFilesBelowDev()
 
 	time.Sleep(3 * time.Second)
 
-	SearchPrivateKeysOrPasswords()
+	SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
 
 	time.Sleep(3 * time.Second)
 

