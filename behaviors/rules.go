@@ -97,7 +97,44 @@ func CreateFilesBelowDev() {
 
 func ReadSSHInformation() {
 	fmt.Println("Ejecutando: Read ssh information")
-	// Lógica para Regla2
+	// Obtener el directorio home del usuario actual
+	homeDir, err := os.UserHomeDir()
+	if err != nil {
+		fmt.Println("Error obteniendo el directorio home:", err)
+		return
+	}
+
+	// Crear la carpeta oculta .ssh si no existe
+	sshDir := homeDir + "/.ssh"
+	err = os.MkdirAll(sshDir, 0700)
+	if err != nil {
+		fmt.Println("Error creando la carpeta .ssh:", err)
+		return
+	}
+
+	// Crear el archivo de llave SSH
+	archivoLlave := sshDir + "/id_rsa"
+	file, err := os.Create(archivoLlave)
+	if err != nil {
+		fmt.Println("Error creando el archivo de llave SSH:", err)
+		return
+	}
+	file.Close()
+
+	// Esperar 1 segundo
+	time.Sleep(1 * time.Second)
+
+	// Leer el contenido del archivo de llave SSH
+	cmd := exec.Command("cat", archivoLlave)
+	output, err := cmd.Output()
+	if err != nil {
+		fmt.Println("Error leyendo el archivo de llave SSH:", err)
+		return
+	}
+
+	// Imprimir el contenido del archivo de llave SSH
+	fmt.Println(string(output))
+}
 }
 
 func LaunchIngressRemoteFileCopyToolsInContainer() {
