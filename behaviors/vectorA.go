@@ -33,7 +33,12 @@ func RunVectorA() {
 
 	time.Sleep(3 * time.Second)
 
-	ClearLogActivities()
+	err := ClearLogActivities()
+	if err != nil {
+		fmt.Println("Error:", err)
+	} else {
+		fmt.Println("El contenido del archivo fue eliminado exitosamente.")
+	}
 
 	// Esperar 3 segundos
 	time.Sleep(3 * time.Second)

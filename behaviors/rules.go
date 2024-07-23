@@ -9,6 +9,7 @@ import (
 	"os/exec"
 	"path/filepath"
 	"strings"
+	"syscall"
 	"time"
 )
 
@@ -199,9 +200,20 @@ func LinuxKernelModuleInjection() error {
 	return nil
 }
 
-func ClearLogActivities() {
+func ClearLogActivities() error {
 	fmt.Println("Ejecutando: Clear Log Activities")
-	// Lógica para Regla3
+
+	filename := "/var/log/kern.log"
+
+	// Abre el archivo con las banderas O_WRONLY, O_TRUNC y O_SYNC
+	file, err := os.OpenFile(filename, os.O_WRONLY|os.O_TRUNC|syscall.O_SYNC, 0644)
+	if err != nil {
+		return fmt.Errorf("no se pudo abrir el archivo: %v", err)
+	}
+	defer file.Close()
+
+	return nil
+
 }
 
 func RemoveBulkDatafromDisk() {
