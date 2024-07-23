@@ -27,6 +27,8 @@ func RunVectorA() {
 
 	time.Sleep(3 * time.Second)
 
+	ReadSSHInformation()
+
 	SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
 
 	time.Sleep(3 * time.Second)
