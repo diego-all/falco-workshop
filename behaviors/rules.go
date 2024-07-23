@@ -135,7 +135,6 @@ func ReadSSHInformation() {
 	// Imprimir el contenido del archivo de llave SSH
 	fmt.Println(string(output))
 }
-}
 
 func LaunchIngressRemoteFileCopyToolsInContainer() {
 	fmt.Println("Ejecutando Regla3")
