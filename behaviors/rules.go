@@ -138,13 +138,46 @@ func ReadSSHInformation() {
 }
 
 func LaunchIngressRemoteFileCopyToolsInContainer() {
-	fmt.Println("Ejecutando Regla3")
-	// Lógica para Regla3
+	fmt.Println("Launch Ingress Remote File Copy Tools in Container")
+
+	// URL y nombre del archivo de salida
+	url := "http://34.27.180.215/sitio/vuelta.txt"
+	outputFileName := "descarga.txt"
+
+	// Comando curl
+	cmd := exec.Command("curl", "-o", outputFileName, url)
+
+	// Ejecutar el comando
+	err := cmd.Run()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error al ejecutar curl: %v\n", err)
+		os.Exit(1)
+	}
+
+	fmt.Printf("Archivo descargado con éxito: %s\n", outputFileName)
+
 }
 
 func OutboundConnectionToC2Servers() {
 	fmt.Println("Ejecutando: Outbound Connection to C2 Servers")
-	// Lógica para Regla3
+
+	url := "34.27.180.215" // IP de la URL (sin el prefijo http://)
+
+	cmd := exec.Command("ping", "-c", "4", url)
+
+	// Redirigir la salida estándar y la salida de error
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	// Ejecutar el comando
+	err := cmd.Run()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error al ejecutar el comando ping: %v\n", err)
+		return
+	}
+
+	fmt.Println("Ping completado con éxito")
+
 }
 
 func LaunchRemoteFileCopyToolsInContainer() {
@@ -219,6 +252,7 @@ func ClearLogActivities() error {
 func RemoveBulkDatafromDisk() {
 	fmt.Println("Ejecutando: Remove Bulk Data from Disk")
 	// Lógica para Regla3
+
 }
 
 // func SearchPrivateKeysOrPasswords() {
