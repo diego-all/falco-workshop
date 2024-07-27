@@ -182,12 +182,49 @@ func OutboundConnectionToC2Servers() {
 
 func LaunchRemoteFileCopyToolsInContainer() {
 	fmt.Println("Ejecutando: Launch Remote File Copy Tools in Container")
-	// Lógica para Regla3
+
+	fmt.Println("Ejecutando: SFTP Download")
+
+	// Definir los parámetros del comando SFTP
+	user := "usuario"
+	host := "servidor.sftp.com"
+	remoteFile := "/ruta/del/archivo/remoto.txt"
+	localFile := "/ruta/del/archivo/local.txt"
+
+	// Construir el comando SFTP
+	cmd := exec.Command("sftp", fmt.Sprintf("%s@%s:%s", user, host, remoteFile), localFile)
+
+	// Redirigir la salida estándar y la salida de error
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	// Ejecutar el comando
+	err := cmd.Run()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error al ejecutar el comando sftp: %v\n", err)
+		return
+	}
+
+	fmt.Println("Descarga SFTP completada con éxito")
+
 }
 
 func DirectoryTraversalMonitoredFileRead() {
 	fmt.Println("Ejecutando: Directory Traversal monitored file read")
-	// Lógica para Regla3
+
+	// Definir el comando y sus argumentos
+	cmd := exec.Command("cat", "../../../../etc/passwd")
+
+	// Redirigir la salida estándar a la salida estándar del programa
+	cmd.Stdout = os.Stdout
+	cmd.Stderr = os.Stderr
+
+	// Ejecutar el comando
+	err := cmd.Run()
+	if err != nil {
+		fmt.Fprintf(os.Stderr, "Error al ejecutar el comando: %v\n", err)
+		os.Exit(1)
+	}
 }
 
 func LinuxKernelModuleInjection() error {
