@@ -25,11 +25,14 @@ func ShowMenu() {
 	fmt.Println("8. Clear Log Activities")
 	fmt.Println("9. Remove Bulk Data from Disk")
 	fmt.Println("10. Search Private Keys or Passwords")
-	fmt.Println("11. ")
-	fmt.Println("12. Detect crypto miners using the Stratum protocol")
-	fmt.Println("13. XXX")
-	fmt.Println("14. XXXX")
-	fmt.Println("15. XXXXX")
+	fmt.Println("11. Detect crypto miners using the Stratum protocol")
+	fmt.Println("12. Packet socket created in container")
+	fmt.Println("13. Launch Suspicious Network Tool in Container")
+	fmt.Println("14. Sudo Potential Privilege Escalation")
+	fmt.Println("15. Netcat Remote Code Execution in Container")
+	fmt.Println("16. XXXXXXX")
+	fmt.Println("17. XXXXXXX")
+	fmt.Println("18. XXXXXXX")
 
 	var choice int
 	fmt.Print("Ingrese el número de la opción: ")
@@ -59,11 +62,11 @@ func ShowMenu() {
 	case 11:
 		DetectCryptoMinersUsingTheStratumProtocol()
 	case 12:
-		LaunchSuspiciousNetworkToolInContainer()
+		PacketSocketCreatedInContainer() // LaunchSuspiciousNetworkToolInContainer
 	case 13:
-		NetcatRemoteCodeExecutionInContainer()
+		LaunchSuspiciousNetworkToolInContainer()
 	case 14:
-		NetcatRemoteCodeExecutionInContainer()
+		SudoPotentialPrivilegeEscalation()
 	case 15:
 		NetcatRemoteCodeExecutionInContainer()
 	default:
@@ -77,6 +80,7 @@ func CreateFilesBelowDev() {
 	filePath := "/dev/randomrtk"
 
 	// Crear el archivo
+
 	file, err := os.Create(filePath)
 	if err != nil {
 		fmt.Println("Error al crear el archivo:", err)
@@ -286,9 +290,22 @@ func ClearLogActivities() error {
 
 }
 
+// Considerar que tambien se peude ejecutar mkfs.ext4
+// Podrian crearse una unidad logica desde una imagen, pero tambien levantaria el comportamiento.
+
 func RemoveBulkDatafromDisk() {
 	fmt.Println("Ejecutando: Remove Bulk Data from Disk")
-	// Lógica para Regla3
+
+	cmd := exec.Command("mkfs", "/dev/sdz1")
+
+	// Ejecutar el comando y capturar cualquier error
+	err := cmd.Run()
+	if err != nil {
+		fmt.Printf("Error al ejecutar el comando: %v\n", err)
+		return
+	}
+
+	fmt.Println("El comando se ejecutó correctamente")
 
 }
 
@@ -403,9 +420,22 @@ func SearchPrivateKeysOrPasswords() {
 	fmt.Println(out2.String())
 }
 
+// Se esta simulando, intentar establecer la conexion utilizando el protocolo.
+
 func DetectCryptoMinersUsingTheStratumProtocol() {
 	fmt.Println("Ejecutando: Detect crypto miners using the Stratum protocol")
-	// Lógica para Regla3
+
+	cmd := exec.Command("touch", "stratum+tcp")
+
+	// Ejecutar el comando y capturar cualquier error
+	err := cmd.Run()
+	if err != nil {
+		fmt.Printf("Error al ejecutar el comando: %v\n", err)
+		return
+	}
+
+	fmt.Println("El comando se ejecutó correctamente")
+
 }
 
 func LaunchSuspiciousNetworkToolInContainer() {
@@ -464,6 +494,29 @@ func LaunchSuspiciousNetworkToolInContainer() {
 
 	fmt.Println("Resultado del comando 'nmap --version':")
 	fmt.Println(translatedOutput)
+}
+
+func PacketSocketCreatedInContainer() {
+
+	//trin
+
+}
+
+// CVE-2021-3156
+
+func SudoPotentialPrivilegeEscalation() {
+
+	cmd := exec.Command("sudoedit", "-s", "\\", "perl", "-e", `print "A" x 20`)
+
+	// Ejecutar el comando y capturar cualquier error
+	err := cmd.Run()
+	if err != nil {
+		fmt.Printf("Error al ejecutar el comando: %v\n", err)
+		return
+	}
+
+	fmt.Println("El comando se ejecutó correctamente")
+
 }
 
 func NetcatRemoteCodeExecutionInContainer() {
