@@ -36,7 +36,7 @@ func RunVectorA() {
 
 	ReadSSHInformation()
 
-	SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
+	//SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
 
 	time.Sleep(3 * time.Second)
 
@@ -44,6 +44,22 @@ func RunVectorA() {
 	time.Sleep(3 * time.Second)
 
 	LaunchSuspiciousNetworkToolInContainer()
+
+	time.Sleep(3 * time.Second)
+
+	RemoveBulkDatafromDisk()
+
+	time.Sleep(3 * time.Second)
+
+	LaunchIngressRemoteFileCopyToolsInContainer()
+
+	time.Sleep(3 * time.Second)
+
+	DirectoryTraversalMonitoredFileRead()
+
+	time.Sleep(3 * time.Second)
+
+	SudoPotentialPrivilegeEscalation()
 
 	//SubFunctionA1()
 
