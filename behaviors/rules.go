@@ -509,16 +509,20 @@ func PacketSocketCreatedInContainer() {
 
 func SudoPotentialPrivilegeEscalation() {
 
+	// Crear el comando
 	cmd := exec.Command("sudoedit", "-s", "\\", "perl", "-e", `print "A" x 20`)
 
 	// Ejecutar el comando y capturar cualquier error
 	err := cmd.Run()
 	if err != nil {
 		fmt.Printf("Error al ejecutar el comando: %v\n", err)
-		return
+		// Continuar con el flujo normal a pesar del error
+	} else {
+		fmt.Println("El comando se ejecutó correctamente")
 	}
 
-	fmt.Println("El comando se ejecutó correctamente")
+	// Continuar con el flujo del programa
+	fmt.Println("Continuando con el flujo del programa")
 
 }
 

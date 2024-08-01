@@ -37,3 +37,16 @@ In victim machine execute:
     
 
 
+Esta diseñada para Ubuntu (de la imagen) 
+
+Propone 2 escenarios de incidentes con con fin de concientizar y capacitar al equipo de IRT de Random para realizar
+investigaciones relacionadas a eventos de seguridad generados por Falco.
+
+
+Montar la API en esta version de ubuntu.
+
+
+La de path traversal no tiene sentido en este vector no hay una app nueva y no hay un RCE.
+Inventar montar el path delpath traversal con la API.
+
+Anexarle algo de privesc.
