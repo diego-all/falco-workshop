@@ -41,29 +41,8 @@ func RunVectorA() {
 	//SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
 	time.Sleep(3 * time.Second)
 
-	RemoveBulkDatafromDisk()
-
-	time.Sleep(3 * time.Second)
-
-	LaunchIngressRemoteFileCopyToolsInContainer()
-
-	time.Sleep(3 * time.Second)
-
-	DirectoryTraversalMonitoredFileRead()
-
 	time.Sleep(3 * time.Second)
 
 	SudoPotentialPrivilegeEscalation()
 
-	//SubFunctionA1()
-
-	//SubFunctionA2()
-}
-
-func SubFunctionA1() {
-	fmt.Println("SubFunctionA1 ejecutada")
-}
-
-func SubFunctionA2() {
-	fmt.Println("SubFunctionA2 ejecutada")
 }
