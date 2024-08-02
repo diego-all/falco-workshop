@@ -41,6 +41,8 @@ func RunVectorA() {
 	//SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
 	time.Sleep(3 * time.Second)
 
+	PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034()
+
 	time.Sleep(3 * time.Second)
 
 	SudoPotentialPrivilegeEscalation() //  BRUJA DE LA SALIDA ESTANDAR DEL USUARIO

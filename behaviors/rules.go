@@ -29,7 +29,7 @@ func ShowMenu() {
 	fmt.Println("13. Launch Suspicious Network Tool in Container")
 	fmt.Println("14. Sudo Potential Privilege Escalation")
 	fmt.Println("15. Netcat Remote Code Execution in Container")
-	fmt.Println("16. XXXXXXX")
+	fmt.Println("16. Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)")
 	fmt.Println("17. XXXXXXX")
 	fmt.Println("18. XXXXXXX")
 
@@ -68,8 +68,9 @@ func ShowMenu() {
 		SudoPotentialPrivilegeEscalation()
 	case 15:
 		NetcatRemoteCodeExecutionInContainer()
-	case 16:
-		ReadSensitiveFileTrustedAfterActivities()
+	case 16: //  Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)
+		PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034()
+		//ReadSensitiveFileTrustedAfterActivities()
 	default:
 		fmt.Println("Opción no válida")
 	}
@@ -529,6 +530,28 @@ func SudoPotentialPrivilegeEscalation() {
 func NetcatRemoteCodeExecutionInContainer() {
 	fmt.Println("Ejecutando: Detect crypto miners using the Stratum protocol")
 	// Lógica para Regla3
+}
+
+func PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034() {
+	fmt.Println("Ejecutando: Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)")
+
+	// Ejecutar el comando pkexec con un parámetro vacío
+	cmd := exec.Command("pkexec", "")
+
+	// Ejecutar el comando y capturar cualquier error
+	if err := cmd.Run(); err != nil {
+		// Verificar si es un error de ejecución
+		if exitError, ok := err.(*exec.ExitError); ok {
+			fmt.Printf("Error al ejecutar pkexec: %v\n", exitError)
+		} else {
+			// Manejar cualquier otro tipo de error
+			fmt.Printf("Ocurrió un error inesperado: %v\n", err)
+		}
+	}
+
+	// Continuar con el flujo normal del programa
+	fmt.Println("El programa continúa con su flujo normal.")
+
 }
 
 // Intentar levantarla
