@@ -5,14 +5,10 @@ import (
 	"time"
 )
 
-//
+// Puede ser algo externo con LaunchIngressRemoteFileCopyToolsInContainer()  SERIA REPETIDO
 
 func RunVectorB() {
 	fmt.Println("Ejecutando la función para vector B")
-
-	RemoveBulkDatafromDisk()
-
-	time.Sleep(3 * time.Second)
 
 	LaunchIngressRemoteFileCopyToolsInContainer()
 
@@ -23,5 +19,9 @@ func RunVectorB() {
 	time.Sleep(3 * time.Second)
 
 	SudoPotentialPrivilegeEscalation()
+
+	RemoveBulkDatafromDisk()
+
+	time.Sleep(3 * time.Second)
 
 }

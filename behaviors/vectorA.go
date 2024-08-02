@@ -43,6 +43,6 @@ func RunVectorA() {
 
 	time.Sleep(3 * time.Second)
 
-	SudoPotentialPrivilegeEscalation()
+	SudoPotentialPrivilegeEscalation() //  BRUJA DE LA SALIDA ESTANDAR DEL USUARIO
 
 }
