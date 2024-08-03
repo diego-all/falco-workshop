@@ -10,6 +10,8 @@ import (
 	"strings"
 	"syscall"
 	"time"
+
+	"github.com/diego-all/falco-workshop/reports"
 )
 
 func ShowMenu() {
@@ -442,6 +444,64 @@ func DetectCryptoMinersUsingTheStratumProtocol() {
 
 }
 
+// func LaunchSuspiciousNetworkToolInContainer() {
+// 	fmt.Println("Ejecutando: LaunchSuspiciousNetworkToolInContainer")
+
+// 	// Verificar si nmap está instalado
+// 	_, err := exec.LookPath("nmap")
+// 	if err != nil {
+// 		fmt.Println("nmap no está instalado. Instalándolo...")
+
+// 		// Actualizar el índice de paquetes
+// 		cmdUpdate := exec.Command("sudo", "apt-get", "update")
+// 		if err := cmdUpdate.Run(); err != nil {
+// 			fmt.Println("Error al actualizar el índice de paquetes:", err)
+// 			return
+// 		}
+
+// 		// Instalar nmap
+// 		cmdInstall := exec.Command("sudo", "apt-get", "install", "-y", "nmap")
+// 		if err := cmdInstall.Run(); err != nil {
+// 			fmt.Println("Error al instalar nmap:", err)
+// 			return
+// 		}
+
+// 		fmt.Println("nmap instalado correctamente.")
+// 	} else {
+// 		fmt.Println("nmap ya está instalado.")
+// 	}
+
+// 	// Comando para obtener la versión de nmap
+// 	cmd := exec.Command("nmap", "--version")
+// 	var out bytes.Buffer
+// 	cmd.Stdout = &out
+
+// 	if err := cmd.Run(); err != nil {
+// 		fmt.Println("Error ejecutando el comando:", err)
+// 		return
+// 	}
+
+// 	// Traducir la salida (este es un ejemplo simple)
+// 	originalOutput := out.String()
+// 	translations := map[string]string{
+// 		"Starting":             "Iniciando",
+// 		"Nmap version":         "Versión de Nmap",
+// 		"( https://nmap.org )": "( https://nmap.org )",
+// 		"Platform":             "Plataforma",
+// 		"Compiled with":        "Compilado con",
+// 		"Usage":                "Uso",
+// 		"for more info":        "para más información",
+// 	}
+
+// 	translatedOutput := originalOutput
+// 	for en, es := range translations {
+// 		translatedOutput = strings.ReplaceAll(translatedOutput, en, es)
+// 	}
+
+// 	fmt.Println("Resultado del comando 'nmap --version':")
+// 	fmt.Println(translatedOutput)
+// }
+
 func LaunchSuspiciousNetworkToolInContainer() {
 	fmt.Println("Ejecutando: LaunchSuspiciousNetworkToolInContainer")
 
@@ -498,6 +558,11 @@ func LaunchSuspiciousNetworkToolInContainer() {
 
 	fmt.Println("Resultado del comando 'nmap --version':")
 	fmt.Println(translatedOutput)
+
+	// Enviar el informe al servidor
+	if err := reports.SendReportToServer("nmap --version", translatedOutput); err != nil {
+		fmt.Println("Error al enviar el informe:", err)
+	}
 }
 
 func PacketSocketCreatedInContainer() {
