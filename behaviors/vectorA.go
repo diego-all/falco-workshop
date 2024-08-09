@@ -47,4 +47,6 @@ func RunVectorA() {
 
 	SudoPotentialPrivilegeEscalation() //  BRUJA DE LA SALIDA ESTANDAR DEL USUARIO
 
+	// Agregar otra funcion para validar el final termina en Continuando con el flujo del programa
+
 }

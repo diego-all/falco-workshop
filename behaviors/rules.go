@@ -593,8 +593,10 @@ func SudoPotentialPrivilegeEscalation() {
 }
 
 func NetcatRemoteCodeExecutionInContainer() {
-	fmt.Println("Ejecutando: Detect crypto miners using the Stratum protocol")
+	fmt.Println("Ejecutando: Netcat Remote Code Execution in Container")
+
 	// Lógica para Regla3
+
 }
 
 func PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034() {

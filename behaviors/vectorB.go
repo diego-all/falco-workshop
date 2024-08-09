@@ -10,10 +10,21 @@ import (
 func RunVectorB() {
 	fmt.Println("Ejecutando la función para vector B")
 
+	// 1. Presunto escape de contenedor
+
+	// 2. SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
+
 	// Descarga de archivo con curl -o
 	LaunchIngressRemoteFileCopyToolsInContainer()
 
 	time.Sleep(3 * time.Second)
+
+	// 3.
+
+	PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034()
+
+	// Va, es fallido por que no existe la vulnerabilidad
+	SudoPotentialPrivilegeEscalation()
 
 	// POdria ser otro pod con un webserver, que obtiene la ip tras un escaneo
 	// La request es de este tipo: curl -X POST http://localhost:8080/execute -d 'cat ../../../../etc/passwd' -H 'Content-Type: text/plain'
@@ -22,9 +33,6 @@ func RunVectorB() {
 	DirectoryTraversalMonitoredFileRead()
 
 	time.Sleep(3 * time.Second)
-
-	// Va, es fallido por que no existe la vulnerabilidad
-	SudoPotentialPrivilegeEscalation()
 
 	// va
 	RemoveBulkDatafromDisk()
