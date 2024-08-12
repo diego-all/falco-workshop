@@ -70,9 +70,11 @@ func ShowMenu() {
 		SudoPotentialPrivilegeEscalation()
 	case 15:
 		NetcatRemoteCodeExecutionInContainer()
-	case 16: //  Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)
+	case 16:
 		PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034()
 		//ReadSensitiveFileTrustedAfterActivities()
+	case 17:
+		DetecteReleaseAgentFileContainerEscapes()
 	default:
 		fmt.Println("Opción no válida")
 	}
@@ -618,6 +620,34 @@ func PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034() {
 
 	// Continuar con el flujo normal del programa
 	fmt.Println("El programa continúa con su flujo normal.")
+
+}
+
+func DetecteReleaseAgentFileContainerEscapes() {
+
+	// Definimos la función del subproceso container
+	container := func() {
+		// Nombre del archivo a crear
+		fileName := "hola_release_agent"
+
+		// Comando touch para crear el archivo
+		cmd := exec.Command("touch", fileName)
+
+		// Ejecución del comando
+		err := cmd.Run()
+		if err != nil {
+			fmt.Println("Error al crear el archivo:", err)
+			return
+		}
+
+		fmt.Println("Archivo creado exitosamente:", fileName)
+	}
+
+	// Ejecutar la función en un subproceso
+	go container()
+
+	// Esperamos un momento para que el subproceso termine antes de que el programa principal finalice
+	fmt.Println("Subproceso 'container' disparado. Esperando que termine...")
 
 }
 
