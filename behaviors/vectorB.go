@@ -10,6 +10,10 @@ import (
 func RunVectorB() {
 	fmt.Println("Ejecutando la función para vector B")
 
+	DirectoryTraversalMonitoredFileRead()
+
+	time.Sleep(3 * time.Second)
+
 	MountLaunchedInPrivilegedContainer()
 	time.Sleep(3 * time.Second)
 
