@@ -10,6 +10,9 @@ import (
 func RunVectorB() {
 	fmt.Println("Ejecutando la función para vector B")
 
+	MountLaunchedInPrivilegedContainer()
+	time.Sleep(3 * time.Second)
+
 	// 1. Presunto escape de contenedor
 	DetecteReleaseAgentFileContainerEscapes()
 
@@ -27,6 +30,7 @@ func RunVectorB() {
 	time.Sleep(3 * time.Second)
 
 	// Va, es fallido por que no existe la vulnerabilidad
+	// Baron samedit
 	SudoPotentialPrivilegeEscalation()
 
 	// POdria ser otro pod con un webserver, que obtiene la ip tras un escaneo

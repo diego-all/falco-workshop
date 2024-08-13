@@ -75,6 +75,8 @@ func ShowMenu() {
 		//ReadSensitiveFileTrustedAfterActivities()
 	case 17:
 		DetecteReleaseAgentFileContainerEscapes()
+	case 18:
+		MountLaunchedInPrivilegedContainer()
 	default:
 		fmt.Println("Opción no válida")
 	}
@@ -649,6 +651,25 @@ func DetecteReleaseAgentFileContainerEscapes() {
 	// Esperamos un momento para que el subproceso termine antes de que el programa principal finalice
 	fmt.Println("Subproceso 'container' disparado. Esperando que termine...")
 
+}
+
+func MountLaunchedInPrivilegedContainer() error {
+
+	// sudo mount
+	// tengo que estar en sudoers creo (password hardcodeada no es permitido)
+	// mount -o bin/sh /bin/mount
+
+	// Comando que deseas ejecutar
+	cmd := exec.Command("sudo", "mount", "-o", "bind", "/bin/sh", "/bin/mount")
+
+	// Ejecutar el comando y capturar la salida y los errores
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		return fmt.Errorf("error al ejecutar el comando: %v, salida: %s", err, string(output))
+	}
+
+	fmt.Println("Comando ejecutado exitosamente:", string(output))
+	return nil
 }
 
 // Intentar levantarla

@@ -1,0 +1,5 @@
+
+
+1 CreateFilesBelowDev  DONE     /dev/randomrtk
+2 ReadSSHInformation   DONE     Crear carpeta oculta homeDir + "/.ssh"   (IMAGEN)
+3 
