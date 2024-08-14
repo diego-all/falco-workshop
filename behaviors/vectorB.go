@@ -10,15 +10,15 @@ import (
 func RunVectorB() {
 	fmt.Println("Ejecutando la función para vector B")
 
-	// DirectoryTraversalMonitoredFileRead() //funciona
-	//time.Sleep(3 * time.Second)
+	DirectoryTraversalMonitoredFileRead() //funciona
+	time.Sleep(3 * time.Second)
 
 	MountLaunchedInPrivilegedContainer()
 	time.Sleep(3 * time.Second)
 
 	// 1. Presunto escape de contenedor
-	//DetecteReleaseAgentFileContainerEscapes() // requiere privilegios
-	//time.Sleep(3 * time.Second)
+	DetecteReleaseAgentFileContainerEscapes() // requiere privilegios
+	time.Sleep(3 * time.Second)
 
 	// 2. SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
 

