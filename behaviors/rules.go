@@ -239,6 +239,7 @@ func DirectoryTraversalMonitoredFileRead() {
 	}
 }
 
+// Requires root privileges
 func LinuxKernelModuleInjection() error {
 	fmt.Println("Ejecutando: Linux Kernel Module Injection")
 
@@ -625,6 +626,7 @@ func PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034() {
 
 }
 
+// Requires root privileges
 func DetecteReleaseAgentFileContainerEscapes() {
 
 	// Definimos la función del subproceso container
@@ -653,11 +655,16 @@ func DetecteReleaseAgentFileContainerEscapes() {
 
 }
 
+// Requires running a privileged container
 func MountLaunchedInPrivilegedContainer() error {
 
 	// sudo mount
 	// tengo que estar en sudoers creo (password hardcodeada no es permitido)
 	// mount -o bin/sh /bin/mount
+
+	// sudo mount
+
+	// sudo umount /bin/mount
 
 	// Comando que deseas ejecutar
 	cmd := exec.Command("sudo", "mount", "-o", "bind", "/bin/sh", "/bin/mount")
@@ -670,6 +677,8 @@ func MountLaunchedInPrivilegedContainer() error {
 
 	fmt.Println("Comando ejecutado exitosamente:", string(output))
 	return nil
+
+	// Hacer el umount
 }
 
 // Intentar levantarla
