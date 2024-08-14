@@ -576,8 +576,7 @@ func PacketSocketCreatedInContainer() {
 
 }
 
-// CVE-2021-3156
-
+// CVE-2021-3156 (Baron samedit) - The vulnerability does not exist, therefore, it is a failed scenario.
 func SudoPotentialPrivilegeEscalation() {
 
 	// Crear el comando
@@ -604,6 +603,7 @@ func NetcatRemoteCodeExecutionInContainer() {
 
 }
 
+// "Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)" requires pkexec to be installed.
 func PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034() {
 	fmt.Println("Ejecutando: Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)")
 

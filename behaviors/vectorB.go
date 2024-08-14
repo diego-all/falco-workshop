@@ -13,8 +13,8 @@ func RunVectorB() {
 	// DirectoryTraversalMonitoredFileRead() //funciona
 	//time.Sleep(3 * time.Second)
 
-	//MountLaunchedInPrivilegedContainer()
-	//time.Sleep(3 * time.Second)
+	MountLaunchedInPrivilegedContainer()
+	time.Sleep(3 * time.Second)
 
 	// 1. Presunto escape de contenedor
 	//DetecteReleaseAgentFileContainerEscapes() // requiere privilegios
@@ -29,10 +29,8 @@ func RunVectorB() {
 	PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034()
 	time.Sleep(3 * time.Second)
 
-	// Va, es fallido por que no existe la vulnerabilidad
-	// Baron samedit
+	// CVE-2021-3156 (Baron samedit) - The vulnerability does not exist, therefore, it is a failed scenario.
 	SudoPotentialPrivilegeEscalation()
-
 	time.Sleep(3 * time.Second)
 
 	// DirectoryTraversalMonitoredFileRead()
@@ -43,8 +41,8 @@ func RunVectorB() {
 	// Dirbuster ??
 
 	// va
-	RemoveBulkDatafromDisk()
-	time.Sleep(3 * time.Second)
+	// RemoveBulkDatafromDisk()
+	//time.Sleep(3 * time.Second)
 
 	// RESTANTES
 	// Launch Remote File Copy Tools in Container
