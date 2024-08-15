@@ -394,45 +394,106 @@ func RemoveBulkDatafromDisk() {
 //	}
 //
 // ESTA BIEN
+// func SearchPrivateKeysOrPasswords() {
+// 	fmt.Println("Ejecutando: Search Private Keys or Passwords")
+
+// 	// Primer comando
+// 	cmd1 := exec.Command("find", "/", "-name", "id_rsa")
+// 	var out1 bytes.Buffer
+// 	cmd1.Stdout = &out1
+// 	cmd1.Stderr = &out1
+
+// 	if err := cmd1.Run(); err != nil {
+// 		fmt.Println("Error ejecutando el primer comando:", err)
+// 		fmt.Println("Salida del error del primer comando:")
+// 		fmt.Println(out1.String())
+// 	} else {
+// 		fmt.Println("Resultado del primer comando:")
+// 		fmt.Println(out1.String())
+// 	}
+
+// 	// Esperar 3 segundos
+// 	time.Sleep(3 * time.Second)
+
+// 	// Segundo comando
+// 	cmd2 := exec.Command("grep", "-r", "BEGIN RSA PRIVATE", "/")
+// 	var out2 bytes.Buffer
+// 	cmd2.Stdout = &out2
+// 	cmd2.Stderr = &out2
+
+// 	if err := cmd2.Run(); err != nil {
+// 		fmt.Println("Error ejecutando el segundo comando:", err)
+// 		fmt.Println("Salida del error del segundo comando:")
+// 		fmt.Println(out2.String())
+// 		return
+// 	}
+
+// 	fmt.Println("Resultado del segundo comando:")
+// 	fmt.Println(out2.String())
+// }
+
+// ESTA BIEN ENSAYAR SIN SUDO
+
 func SearchPrivateKeysOrPasswords() {
 	fmt.Println("Ejecutando: Search Private Keys or Passwords")
 
-	// Primer comando
+	// Primer comando con límite de tiempo
 	cmd1 := exec.Command("find", "/", "-name", "id_rsa")
-	var out1 bytes.Buffer
-	cmd1.Stdout = &out1
-	cmd1.Stderr = &out1
+	runCommandWithTimeout(cmd1, 5*time.Second)
 
-	if err := cmd1.Run(); err != nil {
-		fmt.Println("Error ejecutando el primer comando:", err)
-		fmt.Println("Salida del error del primer comando:")
-		fmt.Println(out1.String())
-	} else {
-		fmt.Println("Resultado del primer comando:")
-		fmt.Println(out1.String())
-	}
-
-	// Esperar 3 segundos
+	// Esperar 3 segundos antes de ejecutar el siguiente comando
 	time.Sleep(3 * time.Second)
 
-	// Segundo comando
+	// Segundo comando con límite de tiempo
 	cmd2 := exec.Command("grep", "-r", "BEGIN RSA PRIVATE", "/")
-	var out2 bytes.Buffer
-	cmd2.Stdout = &out2
-	cmd2.Stderr = &out2
-
-	if err := cmd2.Run(); err != nil {
-		fmt.Println("Error ejecutando el segundo comando:", err)
-		fmt.Println("Salida del error del segundo comando:")
-		fmt.Println(out2.String())
-		return
-	}
-
-	fmt.Println("Resultado del segundo comando:")
-	fmt.Println(out2.String())
+	runCommandWithTimeout(cmd2, 5*time.Second)
 }
 
-// ESTA BIEN ENSAYAR SIN SUDO
+// Función para ejecutar un comando con un límite de tiempo
+func runCommandWithTimeout(cmd *exec.Cmd, timeout time.Duration) {
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &out
+
+	done := make(chan error, 1)
+	go func() {
+		done <- cmd.Run()
+	}()
+
+	select {
+	case <-time.After(timeout):
+		if err := cmd.Process.Kill(); err != nil {
+			fmt.Println("Error al finalizar el proceso:", err)
+		}
+		fmt.Println("El comando se ha detenido debido al tiempo de espera.")
+	case err := <-done:
+		if err != nil {
+			fmt.Println("Error ejecutando el comando:", err)
+		}
+		// Filtrar mensajes de "Permission denied"
+		result := filterPermissionDenied(out.String())
+		if len(result) > 0 {
+			fmt.Println("Resultado del comando:")
+			fmt.Println(result)
+		} else {
+			fmt.Println("No se encontraron resultados o todos fueron errores de permisos.")
+		}
+	}
+}
+
+// Función para filtrar mensajes de "Permission denied"
+func filterPermissionDenied(output string) string {
+	lines := strings.Split(output, "\n")
+	var filteredLines []string
+
+	for _, line := range lines {
+		if !strings.Contains(line, "Permission denied") {
+			filteredLines = append(filteredLines, line)
+		}
+	}
+
+	return strings.Join(filteredLines, "\n")
+}
 
 // Se esta simulando, intentar establecer la conexion utilizando el protocolo.
 
