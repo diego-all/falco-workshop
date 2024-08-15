@@ -389,15 +389,16 @@ func RemoveBulkDatafromDisk() {
 // 		return
 // 	}
 
-// 	fmt.Println("Resultado del segundo comando:")
-// 	fmt.Println(out2.String())
-// }
-
+//		fmt.Println("Resultado del segundo comando:")
+//		fmt.Println(out2.String())
+//	}
+//
+// ESTA BIEN
 func SearchPrivateKeysOrPasswords() {
 	fmt.Println("Ejecutando: Search Private Keys or Passwords")
 
 	// Primer comando
-	cmd1 := exec.Command("sudo", "find", "/", "-name", "id_rsa")
+	cmd1 := exec.Command("find", "/", "-name", "id_rsa")
 	var out1 bytes.Buffer
 	cmd1.Stdout = &out1
 	cmd1.Stderr = &out1
@@ -415,7 +416,7 @@ func SearchPrivateKeysOrPasswords() {
 	time.Sleep(3 * time.Second)
 
 	// Segundo comando
-	cmd2 := exec.Command("sudo", "grep", "-r", "BEGIN RSA PRIVATE", "/")
+	cmd2 := exec.Command("grep", "-r", "BEGIN RSA PRIVATE", "/")
 	var out2 bytes.Buffer
 	cmd2.Stdout = &out2
 	cmd2.Stderr = &out2
@@ -430,6 +431,8 @@ func SearchPrivateKeysOrPasswords() {
 	fmt.Println("Resultado del segundo comando:")
 	fmt.Println(out2.String())
 }
+
+// ESTA BIEN ENSAYAR SIN SUDO
 
 // Se esta simulando, intentar establecer la conexion utilizando el protocolo.
 
