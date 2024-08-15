@@ -40,4 +40,6 @@ func RunVectorA() {
 
 	// Agregar otra funcion para validar el final termina en Continuando con el flujo del programa
 
+	SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
+
 }

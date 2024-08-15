@@ -23,8 +23,6 @@ func RunVectorB() {
 	DetecteReleaseAgentFileContainerEscapes() // requiere privilegios
 	time.Sleep(3 * time.Second)
 
-	// 2. SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
-
 	// Descarga de archivo con curl -o (No parece ser necesaria)
 	//LaunchIngressRemoteFileCopyToolsInContainer()
 	// time.Sleep(3 * time.Second)
@@ -35,6 +33,8 @@ func RunVectorB() {
 	// CVE-2021-3156 (Baron samedit) - The vulnerability does not exist, therefore, it is a failed scenario.
 	SudoPotentialPrivilegeEscalation()
 	time.Sleep(3 * time.Second)
+
+	// 2. SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
 
 	// DirectoryTraversalMonitoredFileRead()
 	//time.Sleep(3 * time.Second)

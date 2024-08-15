@@ -655,7 +655,7 @@ func DetecteReleaseAgentFileContainerEscapes() {
 
 }
 
-// Requires running a privileged container
+// Requires running a privileged container and root privileges are required to run it.
 func MountLaunchedInPrivilegedContainer() error {
 
 	// sudo mount
