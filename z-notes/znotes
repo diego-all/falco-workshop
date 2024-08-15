@@ -59,3 +59,11 @@ Intentar hacer go go get antes desde python y apagar la salida estandar para que
 
 
 
+    docker build -t diegoall1990/falco-workshop:0.0.1 .
+    docker build --no-cache -t diegoall1990/falco-workshop:0.0.1 .
+
+
+
+
+
+

@@ -10,6 +10,9 @@ import (
 func RunVectorB() {
 	fmt.Println("Ejecutando la función para vector B")
 
+	LaunchSuspiciousNetworkToolInContainer()
+	time.Sleep(3 * time.Second)
+
 	DirectoryTraversalMonitoredFileRead() //funciona
 	time.Sleep(3 * time.Second)
 

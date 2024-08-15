@@ -5,7 +5,7 @@ metadata:
 spec:
   containers:
   - name: my-container
-    image: diegoall1990/ubuntu-lab:1.0.0
+    image: diegoall1990/falco-workshop:0.0.1
     securityContext:
       privileged: true
       capabilities:
@@ -15,3 +15,5 @@ spec:
     stdin: true
     tty: true
     command: ["/bin/bash"]
+
+# kubectl run -i --tty --privileged --image diegoall1990/falco-workshop:0.0.1 victim

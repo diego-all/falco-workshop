@@ -14,7 +14,14 @@ Remember:
 
 ## Installation
 
+
+**In Kubernetes**
+
     kubectl apply -f k8s/victim-workshop.yaml
+
+**In Containers**
+
+    docker run -it --name falco-workshop -h training diegoall1990/falco-workshop:tagname
 
 
 ## Execution
