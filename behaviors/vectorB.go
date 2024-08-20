@@ -16,13 +16,6 @@ func RunVectorB() {
 	DirectoryTraversalMonitoredFileRead() //funciona
 	time.Sleep(3 * time.Second)
 
-	MountLaunchedInPrivilegedContainer()
-	time.Sleep(3 * time.Second)
-
-	// 1. Presunto escape de contenedor
-	DetecteReleaseAgentFileContainerEscapes() // requiere privilegios
-	time.Sleep(3 * time.Second)
-
 	// Descarga de archivo con curl -o (No parece ser necesaria)
 	//LaunchIngressRemoteFileCopyToolsInContainer()
 	// time.Sleep(3 * time.Second)
@@ -34,7 +27,12 @@ func RunVectorB() {
 	SudoPotentialPrivilegeEscalation()
 	time.Sleep(3 * time.Second)
 
-	// 2. SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
+	MountLaunchedInPrivilegedContainer()
+	time.Sleep(3 * time.Second)
+
+	// 1. Presunto escape de contenedor
+	DetecteReleaseAgentFileContainerEscapes() // requiere privilegios
+	time.Sleep(3 * time.Second)
 
 	// DirectoryTraversalMonitoredFileRead()
 	//time.Sleep(3 * time.Second)
