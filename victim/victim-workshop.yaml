@@ -4,7 +4,7 @@ metadata:
   name: victim-pod
 spec:
   containers:
-  - name: my-container
+  - name: victim-pod
     image: diegoall1990/falco-workshop:0.0.1
     securityContext:
       privileged: true

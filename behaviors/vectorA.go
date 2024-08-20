@@ -31,15 +31,13 @@ func RunVectorA() {
 		fmt.Println("El contenido del archivo fue eliminado exitosamente.")
 	}
 
-	LaunchSuspiciousNetworkToolInContainer()
-	time.Sleep(3 * time.Second)
-
 	// Trasladar a la imagen la creacion de la carpeta de llaves para que solo quede la lectura en logs
 	ReadSSHInformation()
 	time.Sleep(3 * time.Second)
 
-	// Agregar otra funcion para validar el final termina en Continuando con el flujo del programa
-
+	// Root privileges are required to search for certain files.
 	SearchPrivateKeysOrPasswords() // Ajustar tarda bastante tiempo
+
+	// Agregar otra funcion para validar el final termina en Continuando con el flujo del programa
 
 }

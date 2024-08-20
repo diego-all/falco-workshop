@@ -38,10 +38,15 @@ Si se requiere un tag especifico
     git push origin v0.1.1
     go run github.com/diego-all/bridge-exe@v0.1.1 init --name Diego
 
+
+    Recordar que cada tag esta ligado a un commit (hay una rara, recordar)
     git show-ref --tags
     
     git tag -d v0.1.1
     git push origin --delete v0.1.1
+
+
+
 
 
 

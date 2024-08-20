@@ -67,3 +67,19 @@ https://www.makeareadme.com/
 
 
 https://dev.to/yuridevat/how-to-create-a-good-readmemd-file-4pa2
+
+
+## Disclaimer
+
+
+Innvestigation
+
+maduration
+
+Custom rules
+
+Simulation
+
+Incident response
+
+

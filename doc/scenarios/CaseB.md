@@ -1,5 +1,8 @@
 # CaseB: Hunting
 
+
+> En una actividad de Hunting el atacante tiene acceso al nodo ....
+
 <img src="/assets/architectureFeeds.jpeg" align="center"/>
 
 

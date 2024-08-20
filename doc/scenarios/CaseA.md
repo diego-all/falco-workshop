@@ -1,6 +1,12 @@
 # CaseA: Infection
 
 
+> Conexión con un sitio malicioso que expone un (downloader), este redirecciona a un software malicioso alojado en GitHub cuyo objetivo es realizar actividades maliciosas al interior del pod infectado. Tales como: 
+Se puede evidenciar como falco detecta la trazabilidad de los compoertamientos del malware en tiempod e ejecución.
+
+
+El complemento lo tengo en las diapositivas, es decir que se puede extraer de cada log.
+
 Imagen
 
 <img src="/assets/architectureFeeds.jpeg" align="center"/>
@@ -55,3 +61,16 @@ Imagen
 
 
     {"hostname":"falcox33-falco-obsec-xxtxw","output":"21:23:54.362400604: Notice Network tool launched in container (user=<NA> user_loginuid=-1 command=nmap --version pid=7761 parent_process=falco-workshop container_id=db0e1dd76a0d container_name=ubuntu-lab-2-container image=docker.io/diegoall1990/ubuntu-lab:1.0.0 module=--version Custom_Tags=IRT_Alert) k8s.ns=falco-custom-lab k8s.pod=ubuntu-lab-2 container=db0e1dd76a0d","priority":"Notice","rule":"Launch Suspicious Network Tool in Container","source":"syscall","tags":["IRT_Alert","mitre_discovery","mitre_exfiltration","network","process"],"time":"2024-08-01T21:23:54.362400604Z", "output_fields": {"container.id":"db0e1dd76a0d","container.image.repository":"docker.io/diegoall1990/ubuntu-lab","container.image.tag":"1.0.0","container.name":"ubuntu-lab-2-container","evt.time":1722547434362400604,"k8s.ns.name":"falco-custom-lab","k8s.pod.name":"ubuntu-lab-2","proc.args":"--version","proc.cmdline":"nmap --version","proc.pid":7761,"proc.pname":"falco-workshop","user.loginuid":-1,"user.name":"<NA>"}}
+
+
+
+### Comportamiento: Lectura de archivos sensibles (keys)
+
+*Regla: Search Private Keys or Passwords*
+
+
+El malware realiza busqueda de contraseñas con: find / -name id_rsa y grep -r BEGIN RSA PRIVATE /
+
+    {"hostname":"falcox33-falco-obsec-zxh2m","output":"21:30:11.017975371: Warning Grep private keys or passwords activities found (user=<NA> user_loginuid=-1 command=find / -name id_rsa pid=20456 container_id=c1eeb4f55f2c container_name=my-container image=docker.io/diegoall1990/falco-workshop:0.0.1 Custom_Tags=IRT_Alert) k8s.ns=falco-custom-lab k8s.pod=victim-pod container=c1eeb4f55f2c","priority":"Warning","rule":"Search Private Keys or Passwords","source":"syscall","tags":["IRT_Alert","mitre_credential_access","process"],"time":"2024-08-15T21:30:11.017975371Z", "output_fields": {"container.id":"c1eeb4f55f2c","container.image.repository":"docker.io/diegoall1990/falco-workshop","container.image.tag":"0.0.1","container.name":"my-container","evt.time":1723757411017975371,"k8s.ns.name":"falco-custom-lab","k8s.pod.name":"victim-pod","proc.cmdline":"find / -name id_rsa","proc.pid":20456,"user.loginuid":-1,"user.name":"<NA>"}}
+
+    {"hostname":"falcox33-falco-obsec-zxh2m","output":"21:30:14.539567958: Warning Grep private keys or passwords activities found (user=<NA> user_loginuid=-1 command=grep -r BEGIN RSA PRIVATE / pid=20486 container_id=c1eeb4f55f2c container_name=my-container image=docker.io/diegoall1990/falco-workshop:0.0.1 Custom_Tags=IRT_Alert) k8s.ns=falco-custom-lab k8s.pod=victim-pod container=c1eeb4f55f2c","priority":"Warning","rule":"Search Private Keys or Passwords","source":"syscall","tags":["IRT_Alert","mitre_credential_access","process"],"time":"2024-08-15T21:30:14.539567958Z", "output_fields": {"container.id":"c1eeb4f55f2c","container.image.repository":"docker.io/diegoall1990/falco-workshop","container.image.tag":"0.0.1","container.name":"my-container","evt.time":1723757414539567958,"k8s.ns.name":"falco-custom-lab","k8s.pod.name":"victim-pod","proc.cmdline":"grep -r BEGIN RSA PRIVATE /","proc.pid":20486,"user.loginuid":-1,"user.name":"<NA>"}}

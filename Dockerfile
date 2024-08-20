@@ -18,6 +18,7 @@ RUN apt-get update && apt install tzdata -y && apt install net-tools nano file -
 RUN yes| unminimize
 RUN apt-get update -y && apt-get upgrade -y && apt-get install ubuntu-minimal -y
 RUN apt-get install -y wget tar sudo adduser netstat-nat net-tools curl
+#RUN apt install sudo=1.8.31-1ubuntu1
 RUN apt-get install -y nmap pkexec golang-go python3
 RUN touch /var/log/kern.log
 RUN useradd -m -s /bin/bash falcox
