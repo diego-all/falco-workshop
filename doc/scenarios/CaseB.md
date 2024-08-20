@@ -6,12 +6,19 @@
 <img src="/assets/architectureFeeds.jpeg" align="center"/>
 
 
+### Comportamiento: Ejecutar escaneo de red
 
-### Comportamiento: loren ipsum
+*Regla: Launch suspicious network tool in container*
 
-*Regla: rule*
+    PENDING
+
+
+### Comportamiento: Intento de directory traversal
+
+*Regla: Directory traversal monitored file read*
 
     {"hostname":"falcox33-falco-obsec-dvlm2","output":"15:15:42.386811464: Warning Read monitored file via directory traversal (username=<NA> useruid=1001 user_loginuid=-1 program=cat exe=/usr/bin/cat command=cat ../../../../etc/passwd pid=12321 parent=falco-workshop file=/etc/passwd fileraw=../../../../etc/passwd parent=falco-workshop gparent=go container_id=c78228991987 image=docker.io/diegoall1990/falco-workshop returncode=SUCCESS cwd=/home/falcox/ Custom_Tags=IRT_Alert) k8s.ns=falco-custom-lab k8s.pod=vistima container=c78228991987","priority":"Warning","rule":"Directory traversal monitored file read","source":"syscall","tags":["IRT_Alert","filesystem","mitre_credential_access","mitre_discovery","mitre_exfiltration"],"time":"2024-08-15T15:15:42.386811464Z", "output_fields": {"container.id":"c78228991987","container.image.repository":"docker.io/diegoall1990/falco-workshop","evt.res":"SUCCESS","evt.time":1723734942386811464,"fd.name":"/etc/passwd","fd.nameraw":"../../../../etc/passwd","k8s.ns.name":"falco-custom-lab","k8s.pod.name":"vistima","proc.aname[2]":"go","proc.cmdline":"cat ../../../../etc/passwd","proc.cwd":"/home/falcox/","proc.exepath":"/usr/bin/cat","proc.name":"cat","proc.pid":12321,"proc.pname":"falco-workshop","user.loginuid":-1,"user.name":"<NA>","user.uid":1001}}
+
 
 
 ### Comportamiento: loren ipsum
