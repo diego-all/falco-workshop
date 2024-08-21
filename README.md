@@ -1,8 +1,14 @@
 # README
 
 
-Remember: 
 
+## Requirements
+
+Golang 1.21 or newer and Python 3.7 or later are required.
+
+
+
+## trin
     Adjust de go versions.
 
     go version
@@ -21,7 +27,7 @@ Remember:
 
 **In Containers**
 
-    docker run -it --name falco-workshop -h training diegoall1990/falco-workshop:tagname
+    docker run -it --name falco-workshop -h training diegoall1990/falco-workshop:tagname (Cooming soon)
 
 
 ## Execution
