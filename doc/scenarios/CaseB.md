@@ -3,7 +3,8 @@
 
 > En una actividad de Hunting el atacante tiene acceso al nodo ....
 
-<img src="/assets/architectureFeeds.jpeg" align="center"/>
+
+<img src="../../assets/privilegeEscalation.png" align="center" width="50%" height="50%"/>
 
 
 ### Comportamiento: Ejecutar escaneo de red
