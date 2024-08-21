@@ -4,7 +4,7 @@
 > En una actividad de Hunting el atacante tiene acceso al nodo ....
 
 
-<img src="../../assets/privilegeEscalation.png" align="center" width="50%" height="50%"/>
+<img src="../../assets/privilegeEscalation.webp" align="center" width="50%" height="50%"/>
 
 
 ### Comportamiento: Ejecutar escaneo de red
