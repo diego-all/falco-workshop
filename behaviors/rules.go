@@ -660,6 +660,11 @@ func SudoPotentialPrivilegeEscalation() {
 
 }
 
+// Designed for obtain shell and execute task with root privileges.
+func SudoPotentialPrivilegeEscalationExploitation() {
+
+}
+
 func NetcatRemoteCodeExecutionInContainer() {
 	fmt.Println("Ejecutando: Netcat Remote Code Execution in Container")
 
