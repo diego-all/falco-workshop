@@ -762,6 +762,26 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 	fmt.Println("Comando './sudo-hax-me-a-sandwich' ejecutado exitosamente")
 	fmt.Printf("Salida del comando: %s\n", runOut)
 
+	// Ejecutar 'whoami' para obtener el usuario actual
+	whoamiCmd := exec.Command("whoami")
+	whoamiOut, whoamiErr := whoamiCmd.CombinedOutput()
+	if whoamiErr != nil {
+		fmt.Printf("Error al ejecutar 'whoami': %v\n", whoamiErr)
+		fmt.Printf("Salida del comando: %s\n", whoamiOut)
+		return
+	}
+	fmt.Printf("Usuario actual: %s\n", whoamiOut)
+
+	// Ejecutar 'id' para obtener el ID del usuario actual
+	idCmd := exec.Command("id")
+	idOut, idErr := idCmd.CombinedOutput()
+	if idErr != nil {
+		fmt.Printf("Error al ejecutar 'id': %v\n", idErr)
+		fmt.Printf("Salida del comando: %s\n", idOut)
+		return
+	}
+	fmt.Printf("ID de usuario: %s\n", idOut)
+
 	// Continuar con el flujo del programa
 	fmt.Println("Continuando con el flujo del programa")
 }
