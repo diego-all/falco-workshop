@@ -860,16 +860,26 @@ func DetecteReleaseAgentFileContainerEscapes() {
 
 }
 
+// Adversario intenta escalar privilegios utilizando una estrategia de SETUID.
+// find / -perm -u=s -type f 2>/dev/null   [Custom Rule]
 // Requires running a privileged container and root privileges are required to run it.
+func UnmountBind() {
+	// Comando que deseas ejecutar
+	cmd := exec.Command("sudo", "umount", "/bin/mount")
+
+	// Ejecutar el comando y capturar la salida y los errores
+	output, err := cmd.CombinedOutput()
+	if err != nil {
+		fmt.Printf("error al ejecutar el comando umount: %v, salida: %s\n", err, string(output))
+		return
+	}
+
+	fmt.Println("Comando umount ejecutado exitosamente:", string(output))
+}
+
 func MountLaunchedInPrivilegedContainer() error {
-
-	// sudo mount
-	// tengo que estar en sudoers creo (password hardcodeada no es permitido)
-	// mount -o bin/sh /bin/mount
-
-	// sudo mount
-
-	// sudo umount /bin/mount
+	// Defer para ejecutar el unmount al final de la función
+	defer UnmountBind()
 
 	// Comando que deseas ejecutar
 	cmd := exec.Command("sudo", "mount", "-o", "bind", "/bin/sh", "/bin/mount")
@@ -877,13 +887,11 @@ func MountLaunchedInPrivilegedContainer() error {
 	// Ejecutar el comando y capturar la salida y los errores
 	output, err := cmd.CombinedOutput()
 	if err != nil {
-		return fmt.Errorf("error al ejecutar el comando: %v, salida: %s", err, string(output))
+		return fmt.Errorf("error al ejecutar el comando mount: %v, salida: %s", err, string(output))
 	}
 
-	fmt.Println("Comando ejecutado exitosamente:", string(output))
+	fmt.Println("Comando mount ejecutado exitosamente:", string(output))
 	return nil
-
-	// Hacer el umount
 }
 
 // Intentar levantarla
