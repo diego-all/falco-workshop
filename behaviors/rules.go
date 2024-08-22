@@ -963,14 +963,42 @@ func NetcatRemoteCodeExecutionInContainer() {
 }
 
 // "Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)" requires pkexec to be installed.
+// func PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034() {
+// 	fmt.Println("Ejecutando: Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)")
+
+// 	// Ejecutar el comando pkexec con un parámetro vacío
+// 	cmd := exec.Command("pkexec", "")
+
+// 	// Ejecutar el comando y capturar cualquier error
+// 	if err := cmd.Run(); err != nil {
+// 		// Verificar si es un error de ejecución
+// 		if exitError, ok := err.(*exec.ExitError); ok {
+// 			fmt.Printf("Error al ejecutar pkexec: %v\n", exitError)
+// 		} else {
+// 			// Manejar cualquier otro tipo de error
+// 			fmt.Printf("Ocurrió un error inesperado: %v\n", err)
+// 		}
+// 	}
+
+// 	// Continuar con el flujo normal del programa
+// 	fmt.Println("El programa continúa con su flujo normal.")
+
+// }
+
 func PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034() {
 	fmt.Println("Ejecutando: Polkit Local Privilege Escalation Vulnerability (CVE-2021-4034)")
 
-	// Ejecutar el comando pkexec con un parámetro vacío
+	// Definir el comando pkexec con un parámetro vacío
 	cmd := exec.Command("pkexec", "")
 
+	// Capturar la salida estándar y de error
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &out
+
 	// Ejecutar el comando y capturar cualquier error
-	if err := cmd.Run(); err != nil {
+	err := cmd.Run()
+	if err != nil {
 		// Verificar si es un error de ejecución
 		if exitError, ok := err.(*exec.ExitError); ok {
 			fmt.Printf("Error al ejecutar pkexec: %v\n", exitError)
@@ -980,9 +1008,17 @@ func PolkitLocalPrivilegeEscalationVulnerability_CVE_2021_4034() {
 		}
 	}
 
+	// Capturar la salida del comando
+	output := out.String()
+	fmt.Printf("Resultado del comando 'pkexec':\n%s\n", output)
+
+	// Enviar el reporte al servidor
+	if err := reports.SendReportToServer("pkexec", output); err != nil {
+		fmt.Println("Error al enviar el informe:", err)
+	}
+
 	// Continuar con el flujo normal del programa
 	fmt.Println("El programa continúa con su flujo normal.")
-
 }
 
 // Requires root privileges
