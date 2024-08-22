@@ -221,21 +221,48 @@ func LaunchRemoteFileCopyToolsInContainer() {
 
 }
 
+// func DirectoryTraversalMonitoredFileRead() {
+// 	fmt.Println("Ejecutando: Directory Traversal monitored file read")
+
+// 	// Definir el comando y sus argumentos
+// 	cmd := exec.Command("cat", "../../../../etc/passwd")
+
+// 	// Redirigir la salida estándar a la salida estándar del programa
+// 	cmd.Stdout = os.Stdout
+// 	cmd.Stderr = os.Stderr
+
+// 	// Ejecutar el comando
+// 	err := cmd.Run()
+// 	if err != nil {
+// 		fmt.Fprintf(os.Stderr, "Error al ejecutar el comando: %v\n", err)
+// 		os.Exit(1)
+// 	}
+// }
+
 func DirectoryTraversalMonitoredFileRead() {
 	fmt.Println("Ejecutando: Directory Traversal monitored file read")
 
 	// Definir el comando y sus argumentos
 	cmd := exec.Command("cat", "../../../../etc/passwd")
 
-	// Redirigir la salida estándar a la salida estándar del programa
-	cmd.Stdout = os.Stdout
-	cmd.Stderr = os.Stderr
+	// Capturar la salida estándar y el error estándar
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &out
 
 	// Ejecutar el comando
 	err := cmd.Run()
 	if err != nil {
 		fmt.Fprintf(os.Stderr, "Error al ejecutar el comando: %v\n", err)
-		os.Exit(1)
+	}
+
+	// Capturar la salida del comando
+	output := out.String()
+	fmt.Printf("Resultado del comando 'cat ../../../../etc/passwd':\n%s\n", output)
+
+	// Enviar el reporte al servidor
+	if err := reports.SendReportToServer("cat ../../../../etc/passwd", output); err != nil {
+		fmt.Println("Error al enviar el informe:", err)
 	}
 }
 
