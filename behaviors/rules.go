@@ -599,7 +599,8 @@ func LaunchSuspiciousNetworkToolInContainer() {
 	}
 
 	// Comando para obtener la versión de nmap
-	cmd := exec.Command("nmap", "--version")
+	//cmd := exec.Command("nmap", "--version", )
+	cmd := exec.Command("nmap", "-sS", "10.0.1.30-40")
 	var out bytes.Buffer
 	cmd.Stdout = &out
 
