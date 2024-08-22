@@ -10,9 +10,6 @@ import (
 func RunVectorB() {
 	fmt.Println("Ejecutando la función para vector B")
 
-	LaunchSuspiciousNetworkToolInContainer()
-	time.Sleep(3 * time.Second)
-
 	DirectoryTraversalMonitoredFileRead() //funciona
 	time.Sleep(3 * time.Second)
 
@@ -34,6 +31,9 @@ func RunVectorB() {
 
 	// 1. Presunto escape de contenedor
 	DetecteReleaseAgentFileContainerEscapes() // requiere privilegios
+	time.Sleep(3 * time.Second)
+
+	LaunchSuspiciousNetworkToolInContainer()
 	time.Sleep(3 * time.Second)
 
 	//sale otra de sensitive file
