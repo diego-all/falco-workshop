@@ -1067,6 +1067,7 @@ func UnmountBind() {
 // Adversario intenta escalar privilegios utilizando una estrategia de SETUID.
 // find / -perm -u=s -type f 2>/dev/null   [Custom Rule]
 // Requires running a privileged container and root privileges are required to run it.
+
 func MountLaunchedInPrivilegedContainer() error {
 	// Defer para ejecutar el unmount al final de la función
 	defer UnmountBind()
@@ -1074,15 +1075,49 @@ func MountLaunchedInPrivilegedContainer() error {
 	// Comando que deseas ejecutar
 	cmd := exec.Command("sudo", "mount", "-o", "bind", "/bin/sh", "/bin/mount")
 
-	// Ejecutar el comando y capturar la salida y los errores
-	output, err := cmd.CombinedOutput()
+	// Capturar la salida estándar y de error
+	var out bytes.Buffer
+	cmd.Stdout = &out
+	cmd.Stderr = &out
+
+	// Ejecutar el comando
+	err := cmd.Run()
+	output := out.String() // Convertir la salida a string
+
+	// Verificar si ocurrió un error
 	if err != nil {
-		return fmt.Errorf("error al ejecutar el comando mount: %v, salida: %s", err, string(output))
+		// Enviar el informe al servidor incluso si hay un error
+		if sendErr := reports.SendReportToServer("sudo mount -o bind /bin/sh /bin/mount", output); sendErr != nil {
+			fmt.Println("Error al enviar el informe:", sendErr)
+		}
+		return fmt.Errorf("error al ejecutar el comando mount: %v, salida: %s", err, output)
 	}
 
-	fmt.Println("Comando mount ejecutado exitosamente:", string(output))
+	// Enviar el informe al servidor si el comando se ejecutó con éxito
+	if sendErr := reports.SendReportToServer("sudo mount -o bind /bin/sh /bin/mount", output); sendErr != nil {
+		fmt.Println("Error al enviar el informe:", sendErr)
+	}
+
+	fmt.Println("Comando mount ejecutado exitosamente:", output)
 	return nil
 }
+
+// func MountLaunchedInPrivilegedContainer() error {
+// 	// Defer para ejecutar el unmount al final de la función
+// 	defer UnmountBind()
+
+// 	// Comando que deseas ejecutar
+// 	cmd := exec.Command("sudo", "mount", "-o", "bind", "/bin/sh", "/bin/mount")
+
+// 	// Ejecutar el comando y capturar la salida y los errores
+// 	output, err := cmd.CombinedOutput()
+// 	if err != nil {
+// 		return fmt.Errorf("error al ejecutar el comando mount: %v, salida: %s", err, string(output))
+// 	}
+
+// 	fmt.Println("Comando mount ejecutado exitosamente:", string(output))
+// 	return nil
+// }
 
 // Intentar levantarla
 func ReadSensitiveFileTrustedAfterActivities() {
