@@ -663,7 +663,7 @@ func LaunchSuspiciousNetworkToolInContainer() {
 	}
 
 	// Comando nmap con escaneo SYN
-	cmd := exec.Command("nmap", "-sS", "10.0.1.30-40")
+	cmd := exec.Command("nmap", "-sP", "10.0.1.30-40")
 	var out bytes.Buffer
 	cmd.Stdout = &out
 	cmd.Stderr = &out
